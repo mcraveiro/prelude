@@ -13,8 +13,8 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with init.el.  If not, see <http://www.gnu.org/licenses/>.
 
-;; Recent files with ido
-(global-set-key (kbd "C-x w") 'recentf-ido-find-file)
+;; Rebind recent files with ido to our legacy keybinding.
+;; (global-set-key (kbd "C-x w") 'recentf-ido-find-file)
 
 ;; Buffer switching with ido
-(global-set-key (kbd "C-b") 'ido-switch-buffer)
+;; (global-set-key (kbd "C-b") 'ido-switch-buffer)
