@@ -13,5 +13,11 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with init.el.  If not, see <http://www.gnu.org/licenses/>.
 
+;; set the current frame background and font.
 (set-background-color "black")
-(set-frame-font "Inconsolata Bold 16")
+(set-frame-font "Inconsolata Bold 16" nil t)
+
+;; set the font and background for all other frames.
+(add-to-list 'default-frame-alist
+             '(background-color . "black")
+             '(font .  FONT ))

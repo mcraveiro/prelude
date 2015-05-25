@@ -19,7 +19,7 @@
 ;; List of customisation files
 (setq personal-files
       '(
-        "prelude-personal-fonts.el"
+        "prelude-personal-editor.el"
         "prelude-personal-ibuffer.el"
         )
       )
