@@ -20,4 +20,4 @@
 ;; set the font and background for all other frames.
 (add-to-list 'default-frame-alist
              '(background-color . "black")
-             '(font .  FONT ))
+             '(font .  "Inconsolata Bold 16"))
