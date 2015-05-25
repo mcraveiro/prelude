@@ -1,17 +1,36 @@
-;; Copyright (C) 2015  Marco Craveiro
+;;; init-ibuffer.el --- Emacs Prelude: Personal ibuffer configuration.
 ;;
-;; This file is free software; you can redistribute it and/or modify it
-;; under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 3, or (at your option)
-;; any later version.
+;; Copyright © 2015 Marco Craveiro
 ;;
-;; Cunene is distributed in the hope that it will be useful, but WITHOUT
-;; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-;; or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
-;; License for more details.
+;; Author: Marco Craveiro <marco_craveiro@gmail.com>
+;; URL: https://github.com/mcraveiro/prelude
+;; Version: 0.0.0
+;; Keywords: convenience
+
+;; This file is not part of GNU Emacs.
+
+;;; Commentary:
+
+;; Personal ibuffer configuration.
+
+;;; License:
+
+;; This program is free software; you can redistribute it and/or
+;; modify it under the terms of the GNU General Public License
+;; as published by the Free Software Foundation; either version 3
+;; of the License, or (at your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
 ;;
 ;; You should have received a copy of the GNU General Public License
-;; along with init.el.  If not, see <http://www.gnu.org/licenses/>.
+;; along with GNU Emacs; see the file COPYING.  If not, write to the
+;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+;; Boston, MA 02110-1301, USA.
+
+;;; Code:
 
 ;; Group buffers
 (setq ibuffer-saved-filter-groups
@@ -125,10 +144,20 @@
                               (mode . text-mode)))
                ))))
 
+;; Shortcut for ibuffer
 (global-set-key (kbd "<f5>") 'ibuffer)
+
+;; Enable expert mode
 (setq ibuffer-expert t)
+
+;; Remove empty groups
 (setq ibuffer-show-empty-filter-groups nil)
+
+;; Setup filter groups
 (add-hook 'ibuffer-mode-hook
           '(lambda ()
              (ibuffer-auto-mode 1)
-             (ibuffer-switch-to-saved-filter-groups "home")))
+             (ibuffer-switch-to-saved-filter-groups "home")
+             (ibuffer-do-sort-by-filename/process)))
+
+;;; init-buffer.el ends here
