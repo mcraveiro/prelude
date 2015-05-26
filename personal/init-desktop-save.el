@@ -81,5 +81,4 @@
                     (savehist-save)
                     (message nil))))  ; clear the "Desktop saved in..." message
 
-
-;;; init-bm.el ends here
+;;; init-desktop-save.el

@@ -1,20 +1,34 @@
-;;; Marco's .emacs, copied largely from starterkit and Alex Ott's.
+;;; init-hs.el --- Emacs Prelude: Personal hide-show configuration
+;;
+;; Copyright © 2015 Marco Craveiro
+;;
+;; Author: Marco Craveiro <marco_craveiro@gmail.com>
+;; URL: https://github.com/mcraveiro/prelude
+;; Version: 0.0.0
+;; Keywords: convenience
 
-;; Copyright (C) 2009  Marco Craveiro
-;;
+;; This file is not part of GNU Emacs.
+
+;;; Commentary:
+
+;; Personal hide-show configuration
+
+;;; License:
+
 ;; This program is free software; you can redistribute it and/or
-;; modify it under the terms of the GNU General Public License as
-;; published by the Free Software Foundation; either version 3, or (at
-;; your option) any later version.
+;; modify it under the terms of the GNU General Public License
+;; as published by the Free Software Foundation; either version 3
+;; of the License, or (at your option) any later version.
 ;;
-;; This program is distributed in the hope that it will be useful, but
-;; WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-;; General Public License for more details.
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
 ;;
 ;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
-;; hideshow for programming
+;; along with GNU Emacs; see the file COPYING.  If not, write to the
+;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+;; Boston, MA 02110-1301, USA.
 (prelude-require-package 'hideshow)
 
 ;; open block when doing a search
@@ -123,3 +137,5 @@ again, I haven't see that as a problem."
                   )
                 hs-special-modes-alist)
           )
+
+;;; init-hs.el ends here
