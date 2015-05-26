@@ -33,6 +33,7 @@
 ;; Load our snapshotted git version cedet.
 (setq toplevel-dir (file-name-directory (or (buffer-file-name) load-file-name)))
 (load-file (concat toplevel-dir "vendor/cedet/cedet-devel-load.el"))
+(load-file (concat toplevel-dir "vendor/cedet/contrib/cedet-contrib-load.el"))
 
 ;; Add further minor-modes to be enabled by semantic-mode.
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode t)
@@ -110,7 +111,12 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; Enable eassist.
-(prelude-require-package 'eassist)
+(require 'eassist)
+
+(defun my-c-mode-common-hook ()
+  (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp)
+  (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods))
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
 (setq eassist-header-switches
       '(("h" . ("cpp" "cxx" "c++" "CC" "cc" "C" "c" "mm" "m"))
