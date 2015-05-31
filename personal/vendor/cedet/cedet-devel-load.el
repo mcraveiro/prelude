@@ -28,7 +28,7 @@
 (when (featurep 'cedet-devel-load)
   (error "CEDET Version %s already loaded." cedet-version))
 
-;; Load EIEIO that is provided by Emacs
+;; Load EIEIO that is provided by Emacs  
 (require 'eieio)
 
 ;; This file must be in "<INSTALL-DIR>" where 'cedet.el' that

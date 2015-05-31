@@ -1,4 +1,4 @@
-;;; init-git-emacs.el --- Emacs Prelude: Personal git-emacs configuration
+;;; init-log4j.el --- Emacs Prelude: Personal log4j configuration
 ;;
 ;; Copyright © 2015 Marco Craveiro
 ;;
@@ -11,7 +11,7 @@
 
 ;;; Commentary:
 
-;; Personal git-emacs configuration
+;; Personal log4j configuration
 
 ;;; License:
 
@@ -30,15 +30,17 @@
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
-;; Setup git-emacs.
-(setq toplevel-dir (file-name-directory (or (buffer-file-name) load-file-name)))
-(add-to-list 'load-path (concat toplevel-dir "/vendor/git-emacs"))
+;;; Code
 
-;;  Note that we only use this mode for the git state modeline.
-(setq git-state-modeline-decoration 'git-state-decoration-large-dot)
-(require 'git-emacs)
+(prelude-require-package 'log4j-mode)
 
-(setq magit-auto-revert-mode nil)
-(setq magit-last-seen-setup-instructions "1.4.0")
+;; do not auto-revert by default
+(setq log4j-auto-revert-flag nil)
 
-;;; init-git-emacs.el ends here
+(add-hook
+ 'log4j-mode-hook
+ (lambda ()
+   (define-key log4j-mode-local-map [(control down)] 'log4j-forward-record)
+   (define-key log4j-mode-local-map [(control up)] 'log4j-backward-record)))
+
+;;; init-log4j.el ends here:
