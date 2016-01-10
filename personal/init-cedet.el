@@ -41,24 +41,24 @@
 (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode t)
 
 ;; Enable semantic
-(semantic-mode 1)
+; (semantic-mode 1)
 
 ;; Enable ede
 (global-ede-mode 1)
 
 ;; Add a few semantic modes
-(add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
-(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
-(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+;; (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
+;; (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+;; (add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
+;; (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
 
-(require 'semantic/bovine/c)
-(require 'semantic/bovine/gcc)
-(require 'semantic/bovine/clang)
-(require 'semantic/ia)
-(require 'semantic/decorate/include)
-(require 'semantic/lex-spp)
+;; (require 'semantic/bovine/c)
+;; (require 'semantic/bovine/gcc)
+;; (require 'semantic/bovine/clang)
+;; (require 'semantic/ia)
+;; (require 'semantic/decorate/include)
+;; (require 'semantic/lex-spp)
 
 ;; (global-semantic-decoration-mode)
 ;; (global-semantic-highlight-func-mode)
