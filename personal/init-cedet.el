@@ -75,8 +75,8 @@
 ;; (global-set-key (kbd "C-c C-f") 'semantic-symref-symbol)
 
 ;; Enable compilation database support
-(prelude-require-package 'ede-compdb)
-(require 'ede-compdb)
+; (prelude-require-package 'ede-compdb)
+(require 'ede/compdb)
 
 ;; Setup flycheck with compilation database
 (setq-default flycheck-c/c++-clang-executable "/usr/bin/clang++-3.5")
@@ -101,9 +101,11 @@
         (setq-local flycheck-clang-no-rtti t))
       (when (string-match " -fblocks " cmd)
         (setq-local flycheck-clang-blocks t))
+      (message "%s" cmd)
       (setq-local flycheck-clang-includes (get-includes comp))
+      ; (message "%s" flycheck-clang-includes)
       (setq-local flycheck-clang-definitions (get-defines comp))
-      (setq-local flycheck-clang-include-path (get-include-path comp t))
+      (setq-local flycheck-clang-include-path (get-system-include-path comp t))
       )))
 
 (add-hook 'ede-compdb-project-rescan-hook #'flycheck-compdb-setup)
