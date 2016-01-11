@@ -41,35 +41,35 @@
 (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode t)
 
 ;; Enable semantic
-; (semantic-mode 1)
+(semantic-mode 1)
 
 ;; Enable ede
 (global-ede-mode 1)
 
 ;; Add a few semantic modes
-;; (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
-;; (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
-;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
-;; (add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
-;; (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
+(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
+(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
 
-;; (require 'semantic/bovine/c)
-;; (require 'semantic/bovine/gcc)
-;; (require 'semantic/bovine/clang)
-;; (require 'semantic/ia)
-;; (require 'semantic/decorate/include)
-;; (require 'semantic/lex-spp)
+(require 'semantic/bovine/c)
+(require 'semantic/bovine/gcc)
+(require 'semantic/bovine/clang)
+(require 'semantic/ia)
+(require 'semantic/decorate/include)
+(require 'semantic/lex-spp)
 
-;; (global-semantic-decoration-mode)
-;; (global-semantic-highlight-func-mode)
+(global-semantic-decoration-mode)
+(global-semantic-highlight-func-mode)
 
 ;; Disable some annoying semantic decorations
-;; (setq semantic-decoration-styles
-;;       (append
-;;        '(("semantic-decoration-on-includes" . t))
-;;        '(("semantic-decoration-on-protected-members" . nil))
-;;        '(("semantic-decoration-on-private-members" . nil))
-;;        '(("semantic-tag-boundary" . nil))))
+(setq semantic-decoration-styles
+      (append
+       '(("semantic-decoration-on-includes" . t))
+       '(("semantic-decoration-on-protected-members" . nil))
+       '(("semantic-decoration-on-private-members" . nil))
+       '(("semantic-tag-boundary" . nil))))
 
 ;; (Global-set-key (kbd "C-c C-g") 'semantic-symref)
 ;; (global-set-key (kbd "C-c C-f") 'semantic-symref-symbol)
@@ -111,29 +111,29 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; Enable eassist.
-(require 'eassist)
+;; (require 'eassist)
 
-(defun my-c-mode-common-hook ()
-  (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp)
-  (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods))
-(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+;; (defun my-c-mode-common-hook ()
+;;   (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp)
+;;   (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods))
+;; (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
-(setq eassist-header-switches
-      '(("h" . ("cpp" "cxx" "c++" "CC" "cc" "C" "c" "mm" "m"))
-        ("hh" . ("cc" "CC" "cpp" "cxx" "c++" "C"))
-        ("hpp" . ("cpp" "cxx" "c++" "cc" "CC" "C"))
-        ("hxx" . ("cxx" "cpp" "c++" "cc" "CC" "C"))
-        ("h++" . ("c++" "cpp" "cxx" "cc" "CC" "C"))
-        ("H" . ("C" "CC" "cc" "cpp" "cxx" "c++" "mm" "m"))
-        ("HH" . ("CC" "cc" "C" "cpp" "cxx" "c++"))
-        ("cpp" . ("hpp" "hxx" "h++" "HH" "hh" "H" "h"))
-        ("cxx" . ("hxx" "hpp" "h++" "HH" "hh" "H" "h"))
-        ("c++" . ("h++" "hpp" "hxx" "HH" "hh" "H" "h"))
-        ("CC" . ("HH" "hh" "hpp" "hxx" "h++" "H" "h"))
-        ("cc" . ("hh" "HH" "hpp" "hxx" "h++" "H" "h"))
-        ("C" . ("hpp" "hxx" "h++" "HH" "hh" "H" "h"))
-        ("c" . ("h"))
-        ("m" . ("h"))
-        ("mm" . ("h"))))
+;; (setq eassist-header-switches
+;;       '(("h" . ("cpp" "cxx" "c++" "CC" "cc" "C" "c" "mm" "m"))
+;;         ("hh" . ("cc" "CC" "cpp" "cxx" "c++" "C"))
+;;         ("hpp" . ("cpp" "cxx" "c++" "cc" "CC" "C"))
+;;         ("hxx" . ("cxx" "cpp" "c++" "cc" "CC" "C"))
+;;         ("h++" . ("c++" "cpp" "cxx" "cc" "CC" "C"))
+;;         ("H" . ("C" "CC" "cc" "cpp" "cxx" "c++" "mm" "m"))
+;;         ("HH" . ("CC" "cc" "C" "cpp" "cxx" "c++"))
+;;         ("cpp" . ("hpp" "hxx" "h++" "HH" "hh" "H" "h"))
+;;         ("cxx" . ("hxx" "hpp" "h++" "HH" "hh" "H" "h"))
+;;         ("c++" . ("h++" "hpp" "hxx" "HH" "hh" "H" "h"))
+;;         ("CC" . ("HH" "hh" "hpp" "hxx" "h++" "H" "h"))
+;;         ("cc" . ("hh" "HH" "hpp" "hxx" "h++" "H" "h"))
+;;         ("C" . ("hpp" "hxx" "h++" "HH" "hh" "H" "h"))
+;;         ("c" . ("h"))
+;;         ("m" . ("h"))
+;;         ("mm" . ("h"))))
 
 ;;; init-cedet.el ends here

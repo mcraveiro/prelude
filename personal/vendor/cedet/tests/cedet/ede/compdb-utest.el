@@ -30,6 +30,8 @@
 (require 'ert)
 (require 'semantic)
 (require 'cl-lib)
+(require 'rx)
+(require 'inversion)
 (require 'ede/compdb)
 
 ;; Need to have EDE and semantic automatically enabled for new buffers
@@ -53,6 +55,17 @@
   '("-G" "Ninja")
   "Arguments to cmake to generate ninja build files.")
 
+(defconst cmake-version-rx
+  (rx "cmake version "
+      (group
+       (+ (char digit))
+       "."
+       (+ (char digit))
+       (zero-or-one
+        "."
+        (+ (char digit)))
+       )))
+
 (defvar ede-compdb-test-srcdir
   (file-name-as-directory
    (expand-file-name "src/compdb/utest" (when load-file-name (file-name-directory load-file-name)))))
@@ -71,6 +84,14 @@
       (when (> 0 ret)
         (error "Error running CMake: error %d" ret)))
     ))
+
+(defun cmake-version ()
+  "Returns the version of CMake installed."
+  (let ((l (and ede-compdb-test-cmake-path
+                (car (process-lines ede-compdb-test-cmake-path "--version")))))
+    (when (and l (string-match cmake-version-rx l))
+      (inversion-decode-version (match-string 1 l))
+      )))
 
 (defun sleep-until-compilation-done ()
   "Watches the *compilation* buffer and blocks until its process is complete."
@@ -154,10 +175,9 @@
 (ert-deftest ede-compdb-parse-command-line ()
   "Tests parsing of command lines"
   (cl-letf*
-      ((cmdline "g++ -Dfoo -Dbar=baz -Uqux -isystem =/opt/quxx/include -I/opt/local/include -Iincludes -include bar.hpp -imacros config.h -isystem/opt/foo/include --sysroot=/sysroot main.cpp")
+      ((cmdline "g++ -Dfoo -Dbar=baz -Uqux -isystem =/opt/quxx/include -I/opt/local/include -include bar.hpp -imacros config.h -isystem/opt/foo/include -iquote includes --sysroot=/sysroot main.cpp")
        (e (compdb-entry "foo.cpp" :directory "." :command-line cmdline))
-       ;; expected include dirs
-       (incdirs `("/sysroot/opt/quxx/include/" "/opt/local/include/" ,(expand-file-name "includes/") "/opt/foo/include/" "."))
+
        ;; mock out ede-compdb-compiler-include-path
        ((symbol-function 'ede-compdb-compiler-include-path) (lambda (comp dir) '("/opt/g++/include"))))
 
@@ -167,8 +187,15 @@
     (should (equal '("qux") (oref e undefines)))
 
     (should (equal '("foo" "bar=baz") (get-defines e)))
-    (should (equal (append incdirs (list "/sysroot/opt/g++/include")) (get-include-path e)))
-    (should (equal incdirs (get-include-path e t)))
+
+    (should (equal
+             `("." "/opt/local/include/" "/sysroot/opt/quxx/include/" "/opt/foo/include/")
+             (get-system-include-path e t)))
+
+    (should (equal
+             `("." ,(expand-file-name "includes/") "/opt/local/include/" "/sysroot/opt/quxx/include/" "/opt/foo/include/")
+             (get-user-include-path e t)))
+
     (should (equal (mapcar #'expand-file-name '("config.h" "bar.hpp")) (get-includes e)))
     ))
 
@@ -504,9 +531,35 @@ End of search list.
 
 ;;; ede-ninja-project tests
 
+(ert-deftest ede-compdb-ninja-expand-vars ()
+  "Tests resolving Ninja variable expansions."
+  (should (equal "abc/def"
+                 (ede-ninja-expand-vars "$A/${D}"
+                                        '(("A" . "abc") ("D" . "def")))))
+  )
+
+(ert-deftest ede-compdb-ninja-scan-build-rules ()
+  "Tests parsing of Ninja build file to determine build rules."
+  (cl-letf*
+      ((files '(("build.ninja" .
+                 "VAR1=rules.ninja
+VAR2=${VAR1}
+include $VAR2
+rule CXX_2")
+                ("rules.ninja" .
+                 "rule C_1
+rule CXX_1")))
+       ((symbol-function 'insert-file-contents)
+        (lambda (f) (insert (cdr (assoc f files))) (goto-char (point-min)))))
+    (should (equal '("CXX_1" "CXX_2")
+                   (sort (ede-ninja-scan-build-rules "build.ninja" "^CXX") #'string-lessp)))
+    ))
+
 (ert-deftest ede-compdb-ninja-autoload-project ()
   "Tests autoloading of ninja projects when rules.ninja files are discovered"
-  :expected-result (if (and ede-compdb-test-cmake-path ede-compdb-ninja-exe-path) :passed :failed)
+  :expected-result (if (and ede-compdb-test-cmake-path
+                            ede-compdb-ninja-exe-path)
+                       :passed :failed)
   (with-insource-build
    dir :generate-ninja
    (dolist (f '("main.cpp" "world/world.cpp"))
