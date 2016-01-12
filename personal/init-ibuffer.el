@@ -61,6 +61,7 @@
                ("patches" (or
                            (name . "^\\*Assoc file dif")
                            (mode . diff-mode)))
+               ("Dogen - Stitch" (name . ".stitch$"))
                ("bash" (mode . sh-mode))
                ("awk" (mode . awk-mode))
                ("latex" (or
@@ -86,6 +87,7 @@
                                    (mode . dired-mode)
                                    (mode . tar-mode)))
                ("org" (mode . org-mode))
+               ("yaml" (mode . yaml-mode))
                ("msdos" (mode . dos-mode))
                ("version control" (or
                                    (name . "^\\*svn-")
@@ -111,6 +113,9 @@
                                   (name . "^\\*Dired log\\*$")
                                   (name . "^\\*scratch\\*$")
                                   (name . "^\\*gnuplot\\*$")
+                                  (name . "^\\*Flycheck errors\\*$")
+                                  (name . "^\\*compdb:")
+                                  (name . "^\\*Backtrace\\*$")
                                   (name . "^\\*Messages\\*$")))
                ("semantic" (or
                             (mode . data-debug-mode)

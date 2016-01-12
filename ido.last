@@ -8,15 +8,17 @@
 
 ;; ----- ido-work-directory-list -----
 (
- "/home/marco/.emacs.d/personal/"
- "/home/marco/.emacs.d/personal/vendor/cedet/"
  "/home/marco/Development/DomanDrivenConsulting/dogen/projects/yarn/src/types/"
  "/home/marco/Development/DomanDrivenConsulting/dogen/"
+ "/home/marco/.emacs.d/"
+ "/home/marco/Development/"
+ "/home/marco/.emacs.d/personal/"
+ "/home/marco/.emacs.d/personal/vendor/cedet/lisp/cedet/"
+ "/home/marco/Development/DomanDrivenConsulting/dogen/projects/formatters/include/dogen/formatters/types/"
+ "/home/marco/.emacs.d/personal/vendor/cedet/"
  "/home/marco/Development/DomanDrivenConsulting/dogen/projects/"
  "/home/marco/Development/phd/neurite/projects/swc/spec/"
  "/home/marco/Development/DomanDrivenConsulting/dogen/projects/dynamic/src/types/"
- "/home/marco/.emacs.d/"
- "/home/marco/Development/"
  "/home/marco/Development/phd/neurite/"
  "/home/marco/Development/phd/neurite/projects/soma/src/"
  "/home/marco/Development/phd/neurite/projects/"
@@ -34,19 +36,25 @@
 
 ;; ----- ido-dir-file-cache -----
 (
- ("/home/marco/.emacs.d/personal/" (22163 59005 997990 762000) "init-cedet.el" "vendor/" "init-org.el" "init-log4j.el" "init-json.el" "init-ido.el" "init-ibuffer.el" "init-hs.el" "init-highlight-symbol.el" "init-git-gutter.el" "init-git-emacs.el" "init-fixme.el" "init-editor.el" "init-doxymacs.el" "init-dired.el" "init-desktop-save.el" "init-compile.el" "init-c.el" "init-bongo.el" "init-bm.el" "data/" "preload/" ".gitkeep" "../" "./")
+ ("/home/marco/Development/DomanDrivenConsulting/dogen/" (22165 4137 800988 504000) ".travis.yml" ".dogen.ede" ".appveyor.yml" "CMakeLists.txt" ".drone.yml" "conanfile.txt" "test_data/" "sql/" "projects/" "patches/" "images/" "doc/" "diagrams/" "data/" "build/" "README.org" "LICENCE" ".gitignore" ".git/" "../" "./")
+
+ ("/home/marco/.emacs.d/" (22165 3806 517125 531000) "ido.last" "srecode-map.el" "tramp" "init.el" "ede-projects.el" "auto-save-list/" "projectile-bookmarks.eld" "elpa/" "savefile/" "vendor/" "utils/" "themes/" "sample/" "personal/" "modules/" "core/" "README.md" "CONTRIBUTING.md" ".projectile" ".gitignore" ".git/" "../" "./")
+
+ ("/home/marco/Development/" (22163 55940 555885 204000) "emacs/" "phd/" "boost_1_60_0/" "local/" "DomanDrivenConsulting/" "../" "./")
+
+ ("/home/marco/Development/phd/neurite/" (22163 59175 525562 273000) "test_data/" "readme.org" "projects/" "neurite.ede" "doc/" "diagrams/" "conanfile.txt" "build/" "CMakeLists.txt" ".travis.yml" ".gitignore" ".git/" "../" "./")
+
+ ("/home/marco/.emacs.d/personal/" (22163 60190 530885 604000) "init-cedet.el" "vendor/" "init-org.el" "init-log4j.el" "init-json.el" "init-ido.el" "init-ibuffer.el" "init-hs.el" "init-highlight-symbol.el" "init-git-gutter.el" "init-git-emacs.el" "init-fixme.el" "init-editor.el" "init-doxymacs.el" "init-dired.el" "init-desktop-save.el" "init-compile.el" "init-c.el" "init-bongo.el" "init-bm.el" "data/" "preload/" ".gitkeep" "../" "./")
+
+ ("/home/marco/Development/DomanDrivenConsulting/dogen/projects/yarn/src/types/" (22163 59950 620337 410000) "properties_expander.cpp" "modules_expander.cpp" "workflow.cpp" "visitor.cpp" "transformer.cpp" "resolver.cpp" "property_indexer.cpp" "property.cpp" "primitive.cpp" "persister.cpp" "object.cpp" "node.cpp" "nested_name_builder.cpp" "nested_name.cpp" "name_factory.cpp" "name_builder.cpp" "name.cpp" "module.cpp" "model.cpp" "merger.cpp" "location.cpp" "intermediate_model.cpp" "input_descriptor.cpp" "injector.cpp" "identifier_parser.cpp" "generalization_indexer.cpp" "frontend_workflow.cpp" "frontend_registrar.cpp" "frontend_interface.cpp" "expander.cpp" "exception.cpp" "enumerator.cpp" "enumeration.cpp" "elements_traversal.cpp" "element.cpp" "concept_indexer.cpp" "concept.cpp" "association_indexer.cpp" "assembler.cpp" "../" "./")
+
+ ("/home/marco/.emacs.d/personal/vendor/cedet/lisp/cedet/ede/" (22163 59171 685746 44000) "loaddefs.el" "loaddefs.el~" "makefile-edit.elc" "autoconf-edit.elc" "compdb.elc" "android.elc" "arduino.elc" "generic.elc" "linux.elc" "emacs.elc" "config.elc" "ant.elc" "lein2.elc" "maven2.elc" "jvm-base.elc" "java-root.elc" "cpp-root.elc" "project-am.elc" "proj-comp.elc" "proj-aux.elc" "proj-scheme.elc" "proj-info.elc" "proj-shared.elc" "proj-archive.elc" "proj-prog.elc" "proj-obj.elc" "proj-misc.elc" "proj-elisp.elc" "pconf.elc" "pmake.elc" "proj.elc" "m3.elc" "shell.elc" "make.elc" "locate.elc" "files.elc" "srecode.elc" "speedbar.elc" "system.elc" "util.elc" "source.elc" "dired.elc" "custom.elc" "base.elc" "detect.elc" "auto.elc" "util.el" "system.el" "srecode.el" "speedbar.el" "source.el" "shell.el" "project-am.el" "proj.el" "proj-shared.el" "proj-scheme.el" "proj-prog.el" "proj-obj.el" "proj-misc.el" "proj-info.el" "proj-elisp.el" "proj-comp.el" "proj-aux.el" "proj-archive.el" "pmake.el" "pconf.el" "maven2.el" "makefile-edit.el" "make.el" "m3.el" "locate.el" "linux.el" "lein2.el" "jvm-base.el" "java-root.el" "generic.el" "files.el" "emacs.el" "dired.el" "detect.el" "custom.el" "cpp-root.el" "config.el" "compdb.el" "base.el" "autoconf-edit.el" "auto.el" "arduino.el" "ant.el" "android.el" "Project.ede" "Makefile" "../" "./")
 
  ("/home/marco/.emacs.d/personal/vendor/cedet/" (22163 56093 591882 813000) "tests/" "testprojects/" "testdist.sh" "obsolete/" "lisp/" "gettodos.sh" "etc/" "doc/" "contrib/" "cedet-update-version.el" "cedet-update-changelog.el" "cedet-remove-builtin.el" "cedet-emacs-merge.el" "cedet-ediff.el" "cedet-devel-load.el" "cedet-build.el" "PRERELEASE_CHECKLIST" "NEWS" "Makefile.wwwinfo" "Makefile" "INSTALL" "GIT_WORKFLOW" "CEDET_STYLE_GUIDE" ".gitignore" ".ede-ignore" ".cvsignore" "../" "./")
 
  ("/home/marco/.emacs.d/personal/vendor/cedet/lisp/" (22163 56089 71882 883000) "speedbar/" "cedet/" "Project.ede" "Makefile" "../" "./")
 
  ("/home/marco/.emacs.d/personal/vendor/cedet/lisp/cedet/" (22163 57107 445657 992000) "loaddefs.el" "loaddefs.el~" "cogre.elc" "ede.elc" "srecode.elc" "semantic.elc" "working.elc" "pulse.elc" "pprint.elc" "mode-local.elc" "inversion.elc" "fame.elc" "data-debug.elc" "cedet.elc" "cedet-m3.elc" "cedet-java.elc" "cedet-android.elc" "cedet-idutils.elc" "cedet-graphviz.elc" "cedet-files.elc" "cedet-global.elc" "cedet-edebug.elc" "cedet-cscope.elc" "cedet-compat.elc" "working.el" "srecode/" "srecode.el" "semantic/" "semantic.el" "pulse.el" "pprint.el" "mode-local.el" "inversion.el" "fame.el" "ede/" "ede.el" "data-debug.el" "cogre/" "cogre.el" "cedet.el" "cedet-m3.el" "cedet-java.el" "cedet-idutils.el" "cedet-graphviz.el" "cedet-global.el" "cedet-files.el" "cedet-edebug.el" "cedet-cscope.el" "cedet-compat.el" "cedet-android.el" "Project.ede" "Makefile" "../" "./")
-
- ("/home/marco/.emacs.d/personal/vendor/cedet/lisp/cedet/ede/" (22163 58881 804661 398000) "loaddefs.el" "loaddefs.el~" "makefile-edit.elc" "autoconf-edit.elc" "compdb.elc" "android.elc" "arduino.elc" "generic.elc" "linux.elc" "emacs.elc" "config.elc" "ant.elc" "lein2.elc" "maven2.elc" "jvm-base.elc" "java-root.elc" "cpp-root.elc" "project-am.elc" "proj-comp.elc" "proj-aux.elc" "proj-scheme.elc" "proj-info.elc" "proj-shared.elc" "proj-archive.elc" "proj-prog.elc" "proj-obj.elc" "proj-misc.elc" "proj-elisp.elc" "pconf.elc" "pmake.elc" "proj.elc" "m3.elc" "shell.elc" "make.elc" "locate.elc" "files.elc" "srecode.elc" "speedbar.elc" "system.elc" "util.elc" "source.elc" "dired.elc" "custom.elc" "base.elc" "detect.elc" "auto.elc" "util.el" "system.el" "srecode.el" "speedbar.el" "source.el" "shell.el" "project-am.el" "proj.el" "proj-shared.el" "proj-scheme.el" "proj-prog.el" "proj-obj.el" "proj-misc.el" "proj-info.el" "proj-elisp.el" "proj-comp.el" "proj-aux.el" "proj-archive.el" "pmake.el" "pconf.el" "maven2.el" "makefile-edit.el" "make.el" "m3.el" "locate.el" "linux.el" "lein2.el" "jvm-base.el" "java-root.el" "generic.el" "files.el" "emacs.el" "dired.el" "detect.el" "custom.el" "cpp-root.el" "config.el" "compdb.el" "base.el" "autoconf-edit.el" "auto.el" "arduino.el" "ant.el" "android.el" "Project.ede" "Makefile" "../" "./")
-
- ("/home/marco/Development/DomanDrivenConsulting/dogen/" (22163 58284 458946 557000) ".travis.yml" ".appveyor.yml" "CMakeLists.txt" ".dogen.ede" ".drone.yml" "conanfile.txt" "test_data/" "sql/" "projects/" "patches/" "images/" "doc/" "diagrams/" "data/" "build/" "README.org" "LICENCE" ".gitignore" ".git/" "../" "./")
-
- ("/home/marco/Development/DomanDrivenConsulting/dogen/projects/yarn/src/types/" (22163 58463 260291 457000) "properties_expander.cpp" "modules_expander.cpp" "workflow.cpp" "visitor.cpp" "transformer.cpp" "resolver.cpp" "property_indexer.cpp" "property.cpp" "primitive.cpp" "persister.cpp" "object.cpp" "node.cpp" "nested_name_builder.cpp" "nested_name.cpp" "name_factory.cpp" "name_builder.cpp" "name.cpp" "module.cpp" "model.cpp" "merger.cpp" "location.cpp" "intermediate_model.cpp" "input_descriptor.cpp" "injector.cpp" "identifier_parser.cpp" "generalization_indexer.cpp" "frontend_workflow.cpp" "frontend_registrar.cpp" "frontend_interface.cpp" "expander.cpp" "exception.cpp" "enumerator.cpp" "enumeration.cpp" "elements_traversal.cpp" "element.cpp" "concept_indexer.cpp" "concept.cpp" "association_indexer.cpp" "assembler.cpp" "../" "./")
 
  ("/home/marco/Development/DomanDrivenConsulting/dogen/projects/yarn/" (22159 53565 646033 826000) "src/" "spec/" "include/" "CMakeLists.txt" "../" "./")
 
@@ -58,8 +66,6 @@
 
  ("/home/marco/Development/DomanDrivenConsulting/dogen/projects/dynamic/src/types/" (22163 57335 253991 167000) "repository_workflow.cpp" "workflow.cpp" "value_factory.cpp" "value.cpp" "text_collection.cpp" "text.cpp" "repository_selector.cpp" "repository_factory.cpp" "repository.cpp" "ownership_hierarchy.cpp" "object.cpp" "name.cpp" "json_hydrator.cpp" "instantiator.cpp" "hydration_workflow.cpp" "field_selector.cpp" "field_instance_factory.cpp" "field_instance.cpp" "field_definition.cpp" "boolean.cpp" "aggregator.cpp" "../" "./")
 
- ("/home/marco/.emacs.d/" (22163 55369 31894 136000) "ido.last" "tramp" "init.el" "ede-projects.el" "auto-save-list/" "projectile-bookmarks.eld" "elpa/" "savefile/" "vendor/" "utils/" "themes/" "sample/" "personal/" "modules/" "core/" "README.md" "CONTRIBUTING.md" ".projectile" ".gitignore" ".git/" "../" "./")
-
  ("/home/marco/Development/phd/neurite/projects/soma/src/" (22163 54745 331903 883000) "soma.pro.user" "soma.pro" "mainwindow.ui" "mainwindow.h" "mainwindow.cpp" "main.cpp" "CMakeLists.txt" "../" "./")
 
  ("/home/marco/Development/phd/neurite/build/" (22163 48723 823997 986000) "output/" "templates/" "cmake/" "CMakeLists.txt" "../" "./")
@@ -67,8 +73,6 @@
  ("/home/marco/Development/phd/neurite/build/output/" (22163 48725 331997 963000) "gcc/" "../" "./")
 
  ("/home/marco/Development/phd/neurite/build/output/gcc/" (22163 53708 923920 80000) "build.ninja" "rules.ninja" "compile_commands.json" "CMakeCache.txt" ".ninja_deps" ".ninja_log" "CTestTestfile.cmake" "cmake_install.cmake" "projects/" "diagrams/" "stage/" "build/" "CMakeFiles/" "../" "./")
-
- ("/home/marco/Development/phd/neurite/" (22163 54668 103905 90000) "test_data/" "readme.org" "projects/" "neurite.ede" "doc/" "diagrams/" "conanfile.txt" "build/" "CMakeLists.txt" ".travis.yml" ".gitignore" ".git/" "../" "./")
 
  ("/home/marco/Development/DomanDrivenConsulting/dogen/projects/" (22163 44673 727752 563000) "quilt.cpp/" "CMakeLists.txt" "yarn/" "yarn.json/" "yarn.dia/" "utility/" "test_models/" "stitcher/" "stitch/" "quilt/" "knitter/" "knit/" "formatters/" "dynamic/" "dia/" "config/" "../" "./")
 
@@ -103,8 +107,6 @@
  ("/home/marco/" (22163 49778 743981 500000) ".dia/" ".icons/" ".themes/" "tmp/" ".gitconfig" ".bash_history" ".bashrc" ".gnupg/" ".conan/" ".emacs.d/" ".nano/" "Development/" ".ssh/" ".face" ".gnome/" ".pki/" ".gksu.lock" ".mozilla/" ".gnome2_private/" ".gnome2/" ".cinnamon/" ".cache/" ".gconf/" ".ICEauthority" ".config/" "Videos/" "Pictures/" "Music/" "Documents/" "Public/" "Templates/" "Downloads/" "Desktop/" ".local/" ".profile" ".bash_logout" "../" "./")
 
  ("/home/marco/Development/DomanDrivenConsulting/dogen/build/output/gcc/" (22163 48679 891998 673000) "log/" "build.ninja" "rules.ninja" "compile_commands.json" "CMakeCache.txt" "CPackSourceConfig.cmake" "CPackConfig.cmake" "CTestTestfile.cmake" "cmake_install.cmake" "diagrams/" "projects/" "test_data/" "doc/" "data/" "stage/" "build/" "CMakeFiles/" ".ninja_deps" ".ninja_log" "../" "./")
-
- ("/home/marco/Development/" (22163 44267 515758 911000) "phd/" "boost_1_60_0/" "local/" "DomanDrivenConsulting/" "../" "./")
 
  ("/home/marco/Development/DomanDrivenConsulting/" (22159 53559 918033 916000) "dogen/" "../" "./")
 
