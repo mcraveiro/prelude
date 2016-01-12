@@ -31,6 +31,13 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
+(setq toplevel-dir (file-name-directory (or (buffer-file-name) load-file-name)))
+(add-to-list 'load-path (concat toplevel-dir "/vendor"))
+(require 'ede-ibuffer)
+
+(define-key ibuffer-mode-map (kbd "/ e") 'ibuffer-filter-by-ede-project)
+(define-key ibuffer-mode-map (kbd "% e") 'ibuffer-mark-by-ede-project-regexp)
+(define-key ibuffer-mode-map (kbd "s e") 'ibuffer-do-sort-by-ede-project)
 
 ;; Group buffers
 (setq ibuffer-saved-filter-groups

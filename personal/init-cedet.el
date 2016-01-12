@@ -104,6 +104,10 @@
 (add-hook 'ede-minor-mode-hook #'flycheck-compdb-setup)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
+(prelude-require-package 'flycheck-pos-tip)
+(with-eval-after-load 'flycheck
+  (flycheck-pos-tip-mode)
+
 ;; Enable eassist.
 (require 'eassist)
 
