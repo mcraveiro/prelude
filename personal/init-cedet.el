@@ -30,7 +30,6 @@
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
-;; Load our snapshotted git version cedet.
 (setq toplevel-dir (file-name-directory (or (buffer-file-name) load-file-name)))
 (add-to-list 'load-path (concat toplevel-dir "/vendor"))
 
@@ -106,7 +105,7 @@
 
 (prelude-require-package 'flycheck-pos-tip)
 (with-eval-after-load 'flycheck
-  (flycheck-pos-tip-mode)
+  (flycheck-pos-tip-mode))
 
 ;; Enable eassist.
 (require 'eassist)
