@@ -1,4 +1,4 @@
-;;; init-git-gutter.el --- Emacs Prelude: Personal git-gutter configuration
+;;; init-diff-hl.el --- Emacs Prelude: Personal diff-hl configuration
 ;;
 ;; Copyright © 2015 Marco Craveiro
 ;;
@@ -11,7 +11,7 @@
 
 ;;; Commentary:
 
-;; Personal git-gutter configuration
+;; Personal diff-hl configuration
 
 ;;; License:
 
@@ -29,20 +29,7 @@
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
+(prelude-require-package 'diff-hl)
 
-(prelude-require-package 'git-gutter)
-
-(global-git-gutter-mode t)
-
-;; always show the gutter
-(setq git-gutter:always-show-gutter t)
-
-;; (global-set-key (kbd "C-x C-g") 'git-gutter:toggle)
-;; (global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
-
-;; Jump to next/previous hunk
-(global-set-key (kbd "C-x p") 'git-gutter:previous-hunk)
-(global-set-key (kbd "C-x n") 'git-gutter:next-hunk)
-
-;; Revert current hunk
-(global-set-key (kbd "C-x r") 'git-gutter:revert-hunk)
+(setq diff-hl-fringe-bmp-function 'diff-hl-fringe-bmp-from-type)
+(global-diff-hl-mode 1)
