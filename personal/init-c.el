@@ -44,7 +44,6 @@
             (c-set-offset 'arglist-cont-nonempty '+)
             (c-toggle-hungry-state 1)          ;; use hungry delete.
             (auto-fill-mode 1)                 ;; auto fill comments
-            (set (make-local-variable 'comment-auto-fill-only-comments))
             (setq c-basic-offset tab-width)
             (setq c-default-style "stroustrup")))
 

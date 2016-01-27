@@ -31,7 +31,6 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-
 (prelude-require-package 'org)
 
 ;; Formatting of time stamps in clock table.
