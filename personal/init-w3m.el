@@ -123,3 +123,5 @@
                                  (forward-sexp)
                                  (buffer-substring-no-properties
                                   (1- (match-end 0)) (point)))))))
+
+(setq w3m-default-display-inline-images t)
