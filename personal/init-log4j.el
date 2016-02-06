@@ -32,15 +32,15 @@
 
 ;;; Code
 
-(prelude-require-package 'log4j-mode)
+;; (prelude-require-package 'log4j-mode)
 
 ;; do not auto-revert by default
-(setq log4j-auto-revert-flag nil)
+;; (setq log4j-auto-revert-flag nil)
 
-(add-hook
- 'log4j-mode-hook
- (lambda ()
-   (define-key log4j-mode-local-map [(control down)] 'log4j-forward-record)
-   (define-key log4j-mode-local-map [(control up)] 'log4j-backward-record)))
+;; (add-hook
+;;  'log4j-mode-hook
+;;  (lambda ()
+;;    (define-key log4j-mode-local-map [(control down)] 'log4j-forward-record)
+;;    (define-key log4j-mode-local-map [(control up)] 'log4j-backward-record)))
 
 ;;; init-log4j.el ends here:

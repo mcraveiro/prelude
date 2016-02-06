@@ -1,6 +1,6 @@
-;;; init-cmake-ide.el --- Emacs Prelude: Personal bookmarks configuration
+;;; init-logview.el --- Emacs Prelude: Personal Org-mode configuration
 ;;
-;; Copyright © 2015 Marco Craveiro
+;; Copyright © 2016 Marco Craveiro
 ;;
 ;; Author: Marco Craveiro <marco_craveiro@gmail.com>
 ;; URL: https://github.com/mcraveiro/prelude
@@ -11,7 +11,7 @@
 
 ;;; Commentary:
 
-;; Personal bookmarks configuration
+;; Personal LogView configuration
 
 ;;; License:
 
@@ -31,12 +31,15 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
+(prelude-require-package 'logview)
 
-(prelude-require-package 'rtags)
-;; (prelude-require-package 'cmake-ide)
+;; (setq 'logview-additional-timestamp-formats
+;;       '("boost log"
+;;                (regexp . "[0-9]\\{4\\}-[01][0-9]-[0-3][0-9] [012][0-9]:[0-5][0-9]:[0-5][0-9][.,][0-9]\\{3\\}")
+;;                (aliases "yyyy-MM-dd HH:mm:ss.UUUUUU")))
 
-(require 'rtags)
-(setq rtags-path "~/Development/rtags/output/bin/")
-;; (cmake-ide-setup)
-
-;;; init-cmake-ide.el ends here
+;; (setq logview-additional-submodes
+;;       '(("dogen"
+;;          (format . "TIMESTAMP [LEVEL] [NAME]")
+;;          (levels . "SLF4J")
+;;          (timestamp "boost log"))))
