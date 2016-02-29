@@ -43,3 +43,5 @@
 ;;          (format . "TIMESTAMP [LEVEL] [NAME]")
 ;;          (levels . "SLF4J")
 ;;          (timestamp "boost log"))))
+
+(add-to-list 'auto-mode-alist '("\\.log\\'" . logview-mode))
