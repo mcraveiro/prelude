@@ -101,3 +101,5 @@
 (add-hook 'org-mode-hook 'whitespace-mode)
 (add-hook 'js-mode-hook 'whitespace-mode)
 (add-hook 'js2-mode-hook 'whitespace-mode)
+
+(setq jq-interactive-default-options "")
