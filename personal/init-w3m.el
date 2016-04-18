@@ -129,3 +129,9 @@
                                   (1- (match-end 0)) (point)))))))
 
 (setq w3m-default-display-inline-images t)
+
+;; enable normal behaviour for function keys
+(define-key w3m-mode-map [down] 'next-line)
+(define-key w3m-mode-map [up] 'previous-line)
+(define-key w3m-mode-map [right] 'forward-char)
+(define-key w3m-mode-map [left] 'backward-char)
