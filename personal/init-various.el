@@ -69,3 +69,35 @@
                (window-height   . 0.4)))
 
 (prelude-require-package 'pretty-symbols)
+
+;; Give details about white space usage
+(autoload 'whitespace-mode "whitespace" "Toggle whitespace visualization." t)
+(autoload 'whitespace-toggle-options
+  "whitespace" "Toggle local `whitespace-mode' options." t)
+
+;; What to highlight
+(setq whitespace-style
+      '(face tabs trailing lines-tail space-before-tab empty space-after-tab
+             tab-mark))
+
+;; Indicate if empty lines exist at end of the buffer
+(set-default 'indicate-empty-lines t)
+
+;; do not use global mode whitespace
+(global-whitespace-mode 0)
+(setq whitespace-global-modes nil)
+
+;; Show whitespaces on these modes
+(add-hook 'sh-mode-hook 'whitespace-mode)
+(add-hook 'snippet-mode-hook 'whitespace-mode)
+(add-hook 'tex-mode-hook 'whitespace-mode)
+(add-hook 'sql-mode-hook 'whitespace-mode)
+(add-hook 'ruby-mode-hook 'whitespace-mode)
+(add-hook 'diff-mode-hook 'whitespace-mode)
+(add-hook 'c-mode-common-hook 'whitespace-mode)
+(add-hook 'cmake-mode-hook 'whitespace-mode)
+(add-hook 'emacs-lisp-mode-hook 'whitespace-mode)
+(add-hook 'dos-mode-hook 'whitespace-mode)
+(add-hook 'org-mode-hook 'whitespace-mode)
+(add-hook 'js-mode-hook 'whitespace-mode)
+(add-hook 'js2-mode-hook 'whitespace-mode)
