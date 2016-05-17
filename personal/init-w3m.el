@@ -131,7 +131,10 @@
 (setq w3m-default-display-inline-images t)
 
 ;; enable normal behaviour for function keys
-(define-key w3m-mode-map [down] 'next-line)
-(define-key w3m-mode-map [up] 'previous-line)
-(define-key w3m-mode-map [right] 'forward-char)
-(define-key w3m-mode-map [left] 'backward-char)
+(defun w3m-add-keys ()
+  (define-key w3m-mode-map [down] 'next-line)
+  (define-key w3m-mode-map [up] 'previous-line)
+  (define-key w3m-mode-map [right] 'forward-char)
+  (define-key w3m-mode-map [left] 'backward-char))
+
+(add-hook 'w3m-mode-hook 'w3m-add-keys)
