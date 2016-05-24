@@ -34,12 +34,12 @@
 
 ;; set the current frame background and font.
 (set-background-color "black")
-(set-frame-font "Inconsolata Bold 12" nil t)
+(set-frame-font "Inconsolata Bold 14" nil t)
 
 ;; set the font and background for all other frames.
 (add-to-list 'default-frame-alist
              '(background-color . "black")
-             '(font .  "Inconsolata Bold 16"))
+             '(font .  "Inconsolata Bold 14"))
 
 ;; disable scroll bar
 (scroll-bar-mode -1)
