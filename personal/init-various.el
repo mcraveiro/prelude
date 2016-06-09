@@ -6,6 +6,8 @@
 (prelude-require-package 'powerline)
 (prelude-require-package 'smart-mode-line-powerline-theme)
 (prelude-require-package 'persistent-scratch)
+(prelude-require-package 'csharp-mode)
+(prelude-require-package 'psvn)
 (persistent-scratch-setup-default)
 (powerline-default-theme)
 (require 'warnings)
