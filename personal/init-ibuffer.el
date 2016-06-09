@@ -43,18 +43,13 @@
 (setq ibuffer-saved-filter-groups
       (quote (("home"
                ("c++" (mode . c++-mode))
+               ("python" (mode . python-mode))
                ("fsharp" (or
                           (mode . inferior-fsharp-mode)
                           (mode . fsharp-mode)))
-               ("logs" (mode . log4j-mode))
                ("csharp" (mode . csharp-mode))
                ("java" (mode . java-mode))
-               ("make" (or
-                        (mode . cmake-mode)
-                        (mode . makefile-mode)
-                        (mode . makefile-gmake-mode)))
                ("ruby" (mode . ruby-mode))
-               ("t4" (name . ".tt$"))
                ("perl" (mode . perl-mode))
                ("javascript" (or
                               (mode . javascript-mode)
@@ -65,9 +60,11 @@
                ("sql" (or
                        (mode . sql-mode)
                        (name . "^\\*SQL")))
-               ("patches" (or
-                           (name . "^\\*Assoc file dif")
-                           (mode . diff-mode)))
+               ("make" (or
+                        (mode . cmake-mode)
+                        (mode . makefile-mode)
+                        (mode . makefile-gmake-mode)))
+               ("t4" (name . ".tt$"))
                ("Dogen - Stitch" (name . ".stitch$"))
                ("bash" (mode . sh-mode))
                ("awk" (mode . awk-mode))
@@ -75,16 +72,23 @@
                          (name . ".tex$")
                          (mode . tex-mode)
                          (mode . latex-mode)))
+               ("markdown" (or
+                            (mode . markdown-mode)
+                            (mode . gfm-mode)))
                ("emacs-lisp" (or
                               (mode . emacs-lisp-mode)
                               (name . "^\\*Compile-Log\\*$")))
                ("powershell" (or
                               (mode . powershell-mode)
                               (name . "^\\*PowerShell")))
+               ("logs" (or
+                        (mode . log4j-mode)
+                        (mode . logview-mode)))
                ("grep" (or
                          (name . "^\\*Occur\\*$")
                          (name . "^\\*Moccur\\*$")
                          (mode . grep-mode)))
+               ("irc" (mode . erc-mode))
                ("shell" (or
                          (name . "^\\*Shell Command Output\\*$")
                          (mode . shell-mode)
@@ -94,21 +98,58 @@
                                    (mode . dired-mode)
                                    (mode . tar-mode)))
                ("org" (mode . org-mode))
+               ("text files" (or
+                              (mode . conf-unix-mode)
+                              (mode . conf-space-mode)
+                              (mode . text-mode)))
                ("yaml" (mode . yaml-mode))
                ("msdos" (mode . dos-mode))
+               ("patches" (or
+                           (name . "^\\*Assoc file dif")
+                           (mode . diff-mode)))
                ("version control" (or
                                    (name . "^\\*svn-")
                                    (name . "^\\*vc")
                                    (name . "^\\*cvs")
                                    (name . "^\\*magit")))
                ("snippets" (mode . snippet-mode))
+               ("semantic" (or
+                            (mode . data-debug-mode)
+                            (name . "^\\*Parser Output\\*$")
+                            (name . "^\\*Lexer Output\\*$")))
+               ("web browsing" (or
+                                (mode . w3m-mode)
+                                (mode . twittering-mode)
+                                ))
+               ("music" (or
+                         (mode . bongo-playlist-mode)
+                         (mode . bongo-library-mode)))
+               ("mail" (or
+                        (mode . gnus-group-mode)
+                        (mode . gnus-summary-mode)
+                        (mode . gnus-article-mode)
+                        (name . "^\\*imap log\\*$")
+                        (name . "^\\*gnus trace\\*$")
+                        (name . "^\\*nnimap imap.")
+                        ))
+               ("web development" (or
+                                   (mode . html-mode)
+                                   (mode . css-mode)))
+               ("documentation" (or
+                                 (mode . Info-mode)
+                                 (mode . apropos-mode)
+                                 (mode . woman-mode)
+                                 (mode . help-mode)
+                                 (mode . Man-mode)))
                ("system" (or
-                                  (name . "^\\*tramp")
-                                  (name . "^\\*debug tramp")
-                                  (name . "^\\*Proced log\\*$")
-                                  (name . "^\\*Ediff Registry\\*$")
-                                  (name . "^\\*Bookmark List\\*$")
-                                  (name . "^\\*RE-Builder\\*$")
+                          (name . "^\\*Packages\\*$")
+                          (name . "^\\*RTags Log\\*$")
+                          (name . "^\\*tramp")
+                          (name . "^\\*debug tramp")
+                          (name . "^\\*Proced log\\*$")
+                          (name . "^\\*Ediff Registry\\*$")
+                          (name . "^\\*Bookmark List\\*$")
+                          (name . "^\\*RE-Builder\\*$")
                                   (name . "^\\*Kill Ring\\*$")
                                   (name . "^\\*Calendar\\*$")
                                   (name . "^\\*icalendar-errors\\*$")
@@ -124,36 +165,6 @@
                                   (name . "^\\*compdb:")
                                   (name . "^\\*Backtrace\\*$")
                                   (name . "^\\*Messages\\*$")))
-               ("semantic" (or
-                            (mode . data-debug-mode)
-                            (name . "^\\*Parser Output\\*$")
-                            (name . "^\\*Lexer Output\\*$")))
-               ("web browsing" (mode . w3m-mode))
-               ("music" (or
-                         (mode . bongo-playlist-mode)
-                         (mode . bongo-library-mode)))
-               ("mail" (or
-                        (mode . gnus-group-mode)
-                        (mode . gnus-summary-mode)
-                        (mode . gnus-article-mode)
-                        (name . "^\\*Bongo Playlist\\*$")
-                        (name . "^\\*imap log\\*$")
-                        (name . "^\\*gnus trace\\*$")
-                        (name . "^\\*nnimap imap.")
-                        ))
-               ("web development" (or
-                                   (mode . html-mode)
-                                   (mode . css-mode)))
-               ("documentation" (or
-                                 (mode . Info-mode)
-                                 (mode . apropos-mode)
-                                 (mode . woman-mode)
-                                 (mode . help-mode)
-                                 (mode . Man-mode)))
-               ("text files" (or
-                              (mode . conf-unix-mode)
-                              (mode . conf-space-mode)
-                              (mode . text-mode)))
                ))))
 
 ;; Shortcut for ibuffer
