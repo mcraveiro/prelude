@@ -140,3 +140,13 @@
             (unregistered     neo-vc-unregistered-face)
             (user             neo-vc-user-face)
             (t                neo-vc-default-face)))))
+
+;; ido bookmarks
+(defun ido-bookmark-jump()
+  "Uses ido to search for the bookmark"
+  (interactive)
+  (bookmark-jump
+   (bookmark-get-bookmark
+    (ido-completing-read "find bookmark: " (bookmark-all-names)))))
+
+(global-set-key (kbd "C-x r b") 'ido-bookmark-jump)
