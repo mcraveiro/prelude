@@ -150,3 +150,4 @@
     (ido-completing-read "find bookmark: " (bookmark-all-names)))))
 
 (global-set-key (kbd "C-x r b") 'ido-bookmark-jump)
+(prelude-require-package 'powershell)
