@@ -8,6 +8,9 @@
 (prelude-require-package 'persistent-scratch)
 (prelude-require-package 'csharp-mode)
 (prelude-require-package 'psvn)
+(prelude-require-package 'scad-mode)
+(prelude-require-package 'scad-preview)
+
 (persistent-scratch-setup-default)
 (powerline-default-theme)
 (require 'warnings)
