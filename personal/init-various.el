@@ -11,6 +11,9 @@
 (prelude-require-package 'scad-mode)
 (prelude-require-package 'scad-preview)
 (prelude-require-package 'define-word)
+(prelude-require-package 'framemove)
+
+(setq framemove-hook-into-windmove t)
 
 (persistent-scratch-setup-default)
 (powerline-default-theme)
