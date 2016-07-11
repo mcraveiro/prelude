@@ -10,6 +10,7 @@
 (prelude-require-package 'psvn)
 (prelude-require-package 'scad-mode)
 (prelude-require-package 'scad-preview)
+(prelude-require-package 'define-word)
 
 (persistent-scratch-setup-default)
 (powerline-default-theme)
