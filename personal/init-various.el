@@ -154,3 +154,4 @@
 
 (global-set-key (kbd "C-x r b") 'ido-bookmark-jump)
 (prelude-require-package 'powershell)
+(global-set-key (kbd "C-c C-r") 'revert-buffer)
