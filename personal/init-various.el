@@ -14,6 +14,7 @@
 (prelude-require-package 'framemove)
 
 (setq framemove-hook-into-windmove t)
+(setq scad-preview-colorscheme "Starnight")
 
 (persistent-scratch-setup-default)
 (powerline-default-theme)
