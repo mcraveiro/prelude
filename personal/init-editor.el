@@ -34,7 +34,7 @@
 
 ;; set the current frame background and font.
 (set-background-color "black")
-(set-frame-font "Inconsolata Bold 14" nil t)
+(set-frame-font "Inconsolata Bold 12")
 
 ;; set the font and background for all other frames.
 (add-to-list 'default-frame-alist
