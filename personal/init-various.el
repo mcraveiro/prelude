@@ -42,8 +42,8 @@
       (kill-new val)
       (message "%s => kill-ring" val))))
 
-(prelude-require-package 'workgroups2)
-(workgroups-mode 1)
+;; (prelude-require-package 'workgroups2)
+;; (workgroups-mode 1)
 
 (prelude-require-package 'git-timemachine)
 (prelude-require-package 'gh)
