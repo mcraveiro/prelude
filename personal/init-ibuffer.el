@@ -51,6 +51,7 @@
                ("java" (mode . java-mode))
                ("ruby" (mode . ruby-mode))
                ("perl" (mode . perl-mode))
+               ("json" (mode . json-mode))
                ("javascript" (or
                               (mode . javascript-mode)
                               (mode . js2-mode)
@@ -143,7 +144,9 @@
                                  (mode . Man-mode)))
                ("system" (or
                           (name . "^\\*Packages\\*$")
+                          (name . "^\\*helm projectile\\*$")
                           (name . "^\\*RTags Log\\*$")
+                          (name . "^\\**RTags Diagnostics\\*$")
                           (name . "^\\*tramp")
                           (name . "^\\**input/output of")
                           (name . "^\\**threads of")
