@@ -34,6 +34,8 @@
 
 (setq prelude-guru nil)
 
+(setq erc-join-buffer 'bury)
+
 ;; set the current frame background and font.
 (set-background-color "black")
 (set-frame-font "Inconsolata Bold 10")
