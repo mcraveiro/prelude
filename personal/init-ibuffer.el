@@ -43,7 +43,9 @@
 (setq ibuffer-saved-filter-groups
       (quote (("home"
                ("c++" (mode . c++-mode))
-               ("python" (mode . python-mode))
+               ("python" (or
+                          (mode . python-mode)
+                          (name . "^\\*Python\\*$")))
                ("fsharp" (or
                           (mode . inferior-fsharp-mode)
                           (mode . fsharp-mode)))
