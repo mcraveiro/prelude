@@ -34,6 +34,15 @@
 
 (setq prelude-guru nil)
 
+(prelude-require-package 'pretty-mode)
+(prelude-require-package 'helm)
+(prelude-require-package 'helm-flycheck)
+(prelude-require-package 'helm-ispell)
+(prelude-require-package 'helm-package)
+(prelude-require-package 'helm-proc)
+(global-pretty-mode 1)
+(prelude-require-package 'pretty-mode)
+
 (setq erc-join-buffer 'bury)
 
 ;; set the current frame background and font.
