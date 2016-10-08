@@ -30,6 +30,7 @@
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 (prelude-require-package 'diff-hl)
+(global-diff-hl-mode -1)
 
-(setq diff-hl-fringe-bmp-function 'diff-hl-fringe-bmp-from-type)
-(global-diff-hl-mode 1)
+; (setq diff-hl-fringe-bmp-function 'diff-hl-fringe-bmp-from-type)
+; (global-diff-hl-mode 1)

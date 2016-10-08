@@ -33,7 +33,17 @@
 ;;; Code:
 
 (setq prelude-guru nil)
+(prelude-require-package 'git-gutter)
+(global-git-gutter-mode)
+(prelude-require-package 'yasnippet)
+(prelude-require-package 'helm-c-yasnippet)
+(setq helm-yas-space-match-any-greedy t)
+(global-unset-key (kbd "C-c y"))
+(global-set-key (kbd "C-c y") 'helm-yas-complete)
+(yas-global-mode 1)
+(yas-load-directory "~/.emacs.d/personal/data/yasnippets")
 
+(prelude-require-package 'function-args)
 (prelude-require-package 'pretty-mode)
 (prelude-require-package 'helm)
 (prelude-require-package 'helm-flycheck)
@@ -42,6 +52,12 @@
 (prelude-require-package 'helm-proc)
 (global-pretty-mode 1)
 (prelude-require-package 'pretty-mode)
+
+(require 'cycbuf)
+;;  (global-set-key [(meta right)]       'cycbuf-switch-to-next-buffer)
+;; (global-set-key [(meta left)]        'cycbuf-switch-to-previous-buffer)
+(global-set-key [(f6)] 'cycbuf-switch-to-next-buffer-no-timeout)
+(global-set-key [(f7)]  'cycbuf-switch-to-previous-buffer-no-timeout)
 
 (setq erc-join-buffer 'bury)
 
@@ -52,7 +68,7 @@
 ;; set the font and background for all other frames.
 (add-to-list 'default-frame-alist
              '(background-color . "black")
-             '(font .  "Inconsolata Bold 14"))
+             '(font .  "Inconsolata Bold 10"))
 
 ;; disable scroll bar
 (scroll-bar-mode -1)

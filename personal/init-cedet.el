@@ -30,108 +30,108 @@
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
-(setq toplevel-dir (file-name-directory (or (buffer-file-name) load-file-name)))
-(add-to-list 'load-path (concat toplevel-dir "/vendor"))
+; (setq toplevel-dir (file-name-directory (or (buffer-file-name) load-file-name)))
+; (add-to-list 'load-path (concat toplevel-dir "/vendor"))
 
 ;; Add further minor-modes to be enabled by semantic-mode.
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode t)
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode t)
+; (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode t)
+; (add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode t)
 
 ;; Enable semantic
-(semantic-mode 1)
+; (semantic-mode 1)
 
 ;; Enable ede
-(global-ede-mode 1)
+; (global-ede-mode 1)
 
 ;; Add a few semantic modes
-(add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
-(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
-(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+; (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
+; (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+; (add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+; (add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
+; (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
 
-(require 'semantic/bovine/c)
-(require 'semantic/bovine/gcc)
-(require 'semantic/ia)
-(require 'semantic/decorate/include)
-(require 'semantic/lex-spp)
+; (require 'semantic/bovine/c)
+; (require 'semantic/bovine/gcc)
+; (require 'semantic/ia)
+; (require 'semantic/decorate/include)
+; (require 'semantic/lex-spp)
 
-(global-semantic-decoration-mode)
-(global-semantic-highlight-func-mode)
+; (global-semantic-decoration-mode)
+; (global-semantic-highlight-func-mode)
 
 ;; Disable some annoying semantic decorations
-(setq semantic-decoration-styles
-      (append
-       '(("semantic-decoration-on-includes" . t))
-       '(("semantic-decoration-on-protected-members" . nil))
-       '(("semantic-decoration-on-private-members" . nil))
-       '(("semantic-tag-boundary" . nil))))
+;; (setq semantic-decoration-styles
+;;       (append
+;;        '(("semantic-decoration-on-includes" . t))
+;;        '(("semantic-decoration-on-protected-members" . nil))
+;;        '(("semantic-decoration-on-private-members" . nil))
+;;        '(("semantic-tag-boundary" . nil))))
 
 ;; Enable compilation database support
-(prelude-require-package 'ede-compdb)
-(require 'ede-compdb)
+; (prelude-require-package 'ede-compdb)
+; (require 'ede-compdb)
 
 ;; Setup flycheck with compilation database
-(require 'flycheck)
-(setq-default flycheck-c/c++-clang-executable "/usr/bin/clang++-3.7")
+;; (require 'flycheck)
+;; (setq-default flycheck-c/c++-clang-executable "/usr/bin/clang++-3.7")
 
-(defun flycheck-compdb-setup ()
-  (when (and ede-object (oref ede-object compilation))
-    (let* ((comp (oref ede-object compilation))
-           (cmd (get-command-line comp)))
+;; (defun flycheck-compdb-setup ()
+;;   (when (and ede-object (oref ede-object compilation))
+;;     (let* ((comp (oref ede-object compilation))
+;;            (cmd (get-command-line comp)))
 
-      ;; Configure flycheck clang checker.
-      ;; TODO: configure gcc checker also
-      (when (string-match " -std=\\([^ ]+\\)" cmd)
-        (setq-local flycheck-clang-language-standard (match-string 1 cmd)))
-      (when (string-match " -stdlib=\\([^ ]+\\)" cmd)
-        (setq-local flycheck-clang-standard-library (match-string 1 cmd)))
-      (when (string-match " -fms-extensions " cmd)
-        (setq-local flycheck-clang-ms-extensions t))
-      (when (string-match " -fno-exceptions " cmd)
-        (setq-local flycheck-clang-no-exceptions t))
-      (when (string-match " -fno-rtti " cmd)
-        (setq-local flycheck-clang-no-rtti t))
-      (when (string-match " -fblocks " cmd)
-        (setq-local flycheck-clang-blocks t))
-      (setq-local flycheck-clang-includes (get-includes comp))
-      (setq-local flycheck-clang-definitions (get-defines comp))
-      (setq-local flycheck-clang-include-path (get-include-path comp t))
-      )))
+;;       ;; Configure flycheck clang checker.
+;;       ;; TODO: configure gcc checker also
+;;       (when (string-match " -std=\\([^ ]+\\)" cmd)
+;;         (setq-local flycheck-clang-language-standard (match-string 1 cmd)))
+;;       (when (string-match " -stdlib=\\([^ ]+\\)" cmd)
+;;         (setq-local flycheck-clang-standard-library (match-string 1 cmd)))
+;;       (when (string-match " -fms-extensions " cmd)
+;;         (setq-local flycheck-clang-ms-extensions t))
+;;       (when (string-match " -fno-exceptions " cmd)
+;;         (setq-local flycheck-clang-no-exceptions t))
+;;       (when (string-match " -fno-rtti " cmd)
+;;         (setq-local flycheck-clang-no-rtti t))
+;;       (when (string-match " -fblocks " cmd)
+;;         (setq-local flycheck-clang-blocks t))
+;;       (setq-local flycheck-clang-includes (get-includes comp))
+;;       (setq-local flycheck-clang-definitions (get-defines comp))
+;;       (setq-local flycheck-clang-include-path (get-include-path comp t))
+;;       )))
 
-(add-hook 'ede-compdb-project-rescan-hook #'flycheck-compdb-setup)
-(add-hook 'ede-minor-mode-hook #'flycheck-compdb-setup)
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;; (add-hook 'ede-compdb-project-rescan-hook #'flycheck-compdb-setup)
+;; (add-hook 'ede-minor-mode-hook #'flycheck-compdb-setup)
+;; (add-hook 'after-init-hook #'global-flycheck-mode)
 
-(prelude-require-package 'flycheck-pos-tip)
-(with-eval-after-load 'flycheck
-  (flycheck-pos-tip-mode))
+;; (prelude-require-package 'flycheck-pos-tip)
+;; (with-eval-after-load 'flycheck
+;;   (flycheck-pos-tip-mode))
 
 ;; Enable eassist.
-(require 'eassist)
+;; (require 'eassist)
 
-(defun my-c-mode-common-hook ()
-  (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp)
-  (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods)
-  (define-key prelude-mode-map (kbd "M-o") 'eassist-switch-h-cpp))
-(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+;; (defun my-c-mode-common-hook ()
+;;   (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp)
+;;   (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods)
+;;   (define-key prelude-mode-map (kbd "M-o") 'eassist-switch-h-cpp))
+;; (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
-(setq eassist-header-switches
-      '(("h" . ("cpp" "cxx" "c++" "CC" "cc" "C" "c" "mm" "m"))
-        ("hh" . ("cc" "CC" "cpp" "cxx" "c++" "C"))
-        ("hpp" . ("cpp" "cxx" "c++" "cc" "CC" "C"))
-        ("hxx" . ("cxx" "cpp" "c++" "cc" "CC" "C"))
-        ("h++" . ("c++" "cpp" "cxx" "cc" "CC" "C"))
-        ("H" . ("C" "CC" "cc" "cpp" "cxx" "c++" "mm" "m"))
-        ("HH" . ("CC" "cc" "C" "cpp" "cxx" "c++"))
-        ("cpp" . ("hpp" "hxx" "h++" "HH" "hh" "H" "h"))
-        ("cxx" . ("hxx" "hpp" "h++" "HH" "hh" "H" "h"))
-        ("c++" . ("h++" "hpp" "hxx" "HH" "hh" "H" "h"))
-        ("CC" . ("HH" "hh" "hpp" "hxx" "h++" "H" "h"))
-        ("cc" . ("hh" "HH" "hpp" "hxx" "h++" "H" "h"))
-        ("C" . ("hpp" "hxx" "h++" "HH" "hh" "H" "h"))
-        ("c" . ("h"))
-        ("m" . ("h"))
-        ("mm" . ("h"))))
+;; (setq eassist-header-switches
+;;       '(("h" . ("cpp" "cxx" "c++" "CC" "cc" "C" "c" "mm" "m"))
+;;         ("hh" . ("cc" "CC" "cpp" "cxx" "c++" "C"))
+;;         ("hpp" . ("cpp" "cxx" "c++" "cc" "CC" "C"))
+;;         ("hxx" . ("cxx" "cpp" "c++" "cc" "CC" "C"))
+;;         ("h++" . ("c++" "cpp" "cxx" "cc" "CC" "C"))
+;;         ("H" . ("C" "CC" "cc" "cpp" "cxx" "c++" "mm" "m"))
+;;         ("HH" . ("CC" "cc" "C" "cpp" "cxx" "c++"))
+;;         ("cpp" . ("hpp" "hxx" "h++" "HH" "hh" "H" "h"))
+;;         ("cxx" . ("hxx" "hpp" "h++" "HH" "hh" "H" "h"))
+;;         ("c++" . ("h++" "hpp" "hxx" "HH" "hh" "H" "h"))
+;;         ("CC" . ("HH" "hh" "hpp" "hxx" "h++" "H" "h"))
+;;         ("cc" . ("hh" "HH" "hpp" "hxx" "h++" "H" "h"))
+;;         ("C" . ("hpp" "hxx" "h++" "HH" "hh" "H" "h"))
+;;         ("c" . ("h"))
+;;         ("m" . ("h"))
+;;         ("mm" . ("h"))))
 
 ;;; init-cedet.el ends here

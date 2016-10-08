@@ -32,11 +32,36 @@
 
 ;;; Code:
 
+(global-unset-key "\C-cr")
+(add-to-list 'exec-path (expand-file-name "~/Development/rtags/build/bin"))
+(setq rtags-path "~/Development/rtags/build/bin/")
 (prelude-require-package 'rtags)
+(setq rtags-autostart-diagnostics t)
+(rtags-diagnostics)
+(setq rtags-completions-enabled t)
+(setq rtags-use-helm t)
+(rtags-enable-standard-keybindings)
+
+(prelude-require-package 'company)
+(prelude-require-package 'company-quickhelp)
+(push 'company-rtags company-backends)
+(global-company-mode)
+(company-quickhelp-mode 1)
+(define-key c-mode-base-map (kbd "<C-tab>") (function company-complete))
 ;; (prelude-require-package 'cmake-ide)
 
-(require 'rtags)
-(setq rtags-path "~/Development/rtags/output/bin/")
-;; (cmake-ide-setup)
+(prelude-require-package 'flycheck)
+(require 'flycheck-rtags)
 
+(prelude-require-package 'flycheck-pos-tip)
+(with-eval-after-load 'flycheck (flycheck-pos-tip-mode))
+
+(defun my-c-mode-common-hook ()
+  (flycheck-select-checker 'rtags)
+  (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
+  (setq-local flycheck-check-syntax-automatically nil)
+  (define-key c-mode-base-map (kbd "M-o") 'helm-projectile-find-other-file))
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+;; ) ;; path to rdm/rc
 ;;; init-cmake-ide.el ends here
