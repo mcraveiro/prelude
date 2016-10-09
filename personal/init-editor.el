@@ -40,6 +40,7 @@
 (setq helm-yas-space-match-any-greedy t)
 (global-unset-key (kbd "C-c y"))
 (global-set-key (kbd "C-c y") 'helm-yas-complete)
+(global-set-key (kbd "M-o") 'helm-projectile-find-other-file)
 (yas-global-mode 1)
 (yas-load-directory "~/.emacs.d/personal/data/yasnippets")
 
