@@ -53,6 +53,7 @@
 
 (prelude-require-package 'flycheck)
 (require 'flycheck-rtags)
+(setq flycheck-standard-error-navigation nil)
 
 (prelude-require-package 'flycheck-pos-tip)
 (with-eval-after-load 'flycheck (flycheck-pos-tip-mode))
