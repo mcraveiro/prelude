@@ -41,10 +41,11 @@
 (setq rtags-completions-enabled t)
 (setq rtags-use-helm t)
 (rtags-enable-standard-keybindings)
-
+(prelude-require-package 'cycbuf)
 (prelude-require-package 'company)
 (prelude-require-package 'company-quickhelp)
-(push 'company-rtags company-backends)
+(with-eval-after-load 'company
+  (add-to-list 'company-backends 'company-rtags))
 (global-company-mode)
 (company-quickhelp-mode 1)
 (define-key c-mode-base-map (kbd "<C-tab>") (function company-complete))
