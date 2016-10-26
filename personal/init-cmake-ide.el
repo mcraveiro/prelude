@@ -65,5 +65,4 @@
   (define-key c-mode-base-map (kbd "M-o") 'helm-projectile-find-other-file))
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
-;; ) ;; path to rdm/rc
 ;;; init-cmake-ide.el ends here
