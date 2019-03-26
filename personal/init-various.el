@@ -7,13 +7,14 @@
 (prelude-require-package 'smart-mode-line-powerline-theme)
 (prelude-require-package 'persistent-scratch)
 (prelude-require-package 'csharp-mode)
-(prelude-require-package 'psvn)
-(prelude-require-package 'scad-mode)
-(prelude-require-package 'scad-preview)
+; (prelude-require-package 'scad-mode)
+; (prelude-require-package 'scad-preview)
 (prelude-require-package 'define-word)
-(prelude-require-package 'framemove)
+                                        ; (prelude-require-package 'framemove)
+(prelude-require-package 'ace-window)
+(global-set-key (kbd "M-o") 'ace-window)
 
-(setq framemove-hook-into-windmove t)
+; (setq framemove-hook-into-windmove t)
 (setq scad-preview-colorscheme "Starnight")
 
 (persistent-scratch-setup-default)
@@ -66,8 +67,8 @@
 
 (prelude-require-package 'windmove)
 (windmove-default-keybindings 'meta)
-(setq framemove-hook-into-windmove t)
-(prelude-require-package 'framemove)
+; (setq framemove-hook-into-windmove t)
+; (prelude-require-package 'framemove)
 ; (framemove-default-keybindings)
 
 (add-to-list 'display-buffer-alist

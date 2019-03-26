@@ -34,6 +34,20 @@
 
 (setq prelude-guru nil)
 
+(require 'prelude-erc)
+(require 'prelude-ido) ;; Super charges Emacs completion for C-x C-f and more
+(require 'prelude-ivy) ;; A mighty modern alternative to ido
+(require 'prelude-helm) ;; Interface for narrowing and search
+(require 'prelude-helm-everywhere) ;; Enable Helm everywhere
+(require 'prelude-company)
+(require 'prelude-c)
+(require 'prelude-emacs-lisp)
+(require 'prelude-lisp)
+(require 'prelude-lsp)
+(require 'prelude-org) ;; Org-mode helps you keep TODO lists, notes and more
+(require 'prelude-shell)
+(require 'prelude-xml)
+
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (package-initialize)
@@ -57,7 +71,6 @@
 (global-set-key (kbd "M-x") 'helm-M-x)
 (prelude-require-package 'helm-flyspell)
 
-
 (prelude-require-package 'helm-systemd)
 (prelude-require-package 'helm-c-yasnippet)
 (setq helm-yas-space-match-any-greedy t)
@@ -68,11 +81,11 @@
 (prelude-require-package 'helm-projectile)
 (prelude-require-package 'ibuffer-git)
 (prelude-require-package 'json-mode)
-;; (prelude-require-package 'spaceline)
-;; (prelude-require-package 'all-the-icons)
-;; (prelude-require-package 'all-the-icons-ivy)
-;; (prelude-require-package 'all-the-icons-dired)
-;; (prelude-require-package 'spaceline-all-the-icons)
+(prelude-require-package 'spaceline)
+(prelude-require-package 'all-the-icons)
+(prelude-require-package 'all-the-icons-ivy)
+(prelude-require-package 'all-the-icons-dired)
+(prelude-require-package 'spaceline-all-the-icons)
 (prelude-require-package 'protobuf-mode)
 (prelude-require-package 'jump-tree)
 (prelude-require-package 'docker)
@@ -83,19 +96,8 @@
 (prelude-require-package 'treemacs-icons-dired)
 (prelude-require-package 'treemacs-projectile)
 
-; (set-fontset-font t 'unicode (font-spec :family "all-the-icons") nil 'append)
-
-                                        ; (all-the-icons-insert-icons-for 'alltheicon)
-; (set-fontset-font t 'unicode (font-spec :family "all-the-icons") nil 'append)
-;(set-fontset-font t 'unicode (font-spec :family "file-icons") nil 'append)
-;(set-fontset-font t 'unicode (font-spec :family "Material Icons") nil 'append)
-;(set-fontset-font t 'unicode (font-spec :family "github-octicons") nil 'append)
-;(set-fontset-font t 'unicode (font-spec :family "FontAwesome") nil 'append)
-;(set-fontset-font t 'unicode (font-spec :family "Weather Icons") nil 'append)
-
 (global-jump-tree-mode)
-;(spaceline-all-the-icons-theme)
-; (all-the-icons-insert-icons-for 'alltheicon)
+(spaceline-all-the-icons-theme)
 (prelude-require-package 'rainbow-mode)
 (add-hook 'python-mode-hook #'rainbow-mode)
 
