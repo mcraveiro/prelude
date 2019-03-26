@@ -37,15 +37,15 @@
 
 (defvar prelude-mode-map
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-c o") 'crux-open-with)
+    ;; (define-key map (kbd "C-c o") 'crux-open-with)
     (define-key map (kbd "C-c g") 'prelude-google)
     (define-key map (kbd "C-c G") 'prelude-github)
-    (define-key map (kbd "C-c y") 'prelude-youtube)
+    ;; (define-key map (kbd "C-c y") 'prelude-youtube)
     (define-key map (kbd "C-c U") 'prelude-duckduckgo)
     ;; mimic popular IDEs binding, note that it doesn't work in a terminal session
     (define-key map (kbd "C-a") 'crux-move-beginning-of-line)
     (define-key map [(shift return)] 'crux-smart-open-line)
-    (define-key map (kbd "M-o") 'crux-smart-open-line)
+    ;; (define-key map (kbd "M-o") 'crux-smart-open-line)
     (define-key map [(control shift return)] 'crux-smart-open-line-above)
     (define-key map [(control shift up)]  'move-text-up)
     (define-key map [(control shift down)]  'move-text-down)
@@ -60,7 +60,7 @@
     (define-key map (kbd "C-c D") 'crux-delete-file-and-buffer)
     (define-key map (kbd "C-c d") 'crux-duplicate-current-line-or-region)
     (define-key map (kbd "C-c M-d") 'crux-duplicate-and-comment-current-line-or-region)
-    (define-key map (kbd "C-c r") 'crux-rename-buffer-and-file)
+    ;; (define-key map (kbd "C-c r") 'crux-rename-buffer-and-file)
     (define-key map (kbd "C-c t") 'crux-visit-term-buffer)
     (define-key map (kbd "C-c k") 'crux-kill-other-buffers)
     (define-key map (kbd "C-c TAB") 'crux-indent-rigidly-and-copy-to-clipboard)
