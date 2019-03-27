@@ -95,7 +95,7 @@
     (setq default-directory (file-name-directory test-prog))
 
     (message "starting test(s)...")
-    (let ((proc (start-process test-prog buf test-prog "--output_format=XML --log_level=all --repor_level=detailed")))
+    (let ((proc (start-process test-prog buf test-prog "--output_format=XML" "--log_level=all" "--report_level=detailed")))
       (let ((sentinel (lambda (process signal)
                         (unwind-protect
                             (with-current-buffer (process-buffer process)

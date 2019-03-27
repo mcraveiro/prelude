@@ -34,4 +34,7 @@
 (prelude-require-package 'hierarchy)
 (prelude-require-package 'json-navigator)
 
+(require 'json-mode)
+(add-hook 'json-mode-hook 'hs-minor-mode)
+
 ;;; init-json.el ends here

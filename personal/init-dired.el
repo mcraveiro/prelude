@@ -33,8 +33,9 @@
 ;;; Code:
 
 ;; Dired switches
-(setq dired-listing-switches "-l")
-(setq list-directory-brief-switches "-CF")
+(setq dired-listing-switches "-laGh1v --group-directories-first")
+;; (setq list-directory-brief-switches "-CF")
+(setq list-directory-brief-switches nil)
 
 ;; Use a single dired buffer
 ; (require 'dired-single)

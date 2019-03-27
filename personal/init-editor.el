@@ -32,6 +32,24 @@
 
 ;;; Code:
 
+;; set the current frame background and font.
+;; (set-background-color "black")
+;; (set-frame-font "Inconsolata Bold 8")
+                                        ; (set-frame-font "DejaVu Sans Mono")
+                                        ; (set-frame-font "Source Code Pro 8")
+
+                                        ; set the font and background for all other frames.
+;; (add-to-list 'default-frame-alist
+;;              '(background-color . "black")
+;;              '(font .  "Inconsolata Bold 10"))
+
+;; (set-frame-font "Inconsolata Bold 8")
+(setq default-frame-alist
+      '(
+        (background-color . "black")
+        (font . "Inconsolata Bold 8")
+        ))
+
 (setq prelude-guru nil)
 
 (require 'prelude-erc)
@@ -96,8 +114,11 @@
 (prelude-require-package 'treemacs-icons-dired)
 (prelude-require-package 'treemacs-projectile)
 
+(treemacs-icons-dired-mode)
+(treemacs-git-mode 'extended)
+
 (global-jump-tree-mode)
-(spaceline-all-the-icons-theme)
+
 (prelude-require-package 'rainbow-mode)
 (add-hook 'python-mode-hook #'rainbow-mode)
 
@@ -134,17 +155,9 @@
 (add-hook 'erc-mode-hook (lambda () (erc-fill-mode nil)))
 (smartparens-global-mode t)
 
-;; set the current frame background and font.
-(set-background-color "black")
-
-;(set-frame-font "Inconsolata Bold 10")
-; (set-frame-font "DejaVu Sans Mono")
-; (set-frame-font "Source Code Pro 8")
-
-;; set the font and background for all other frames.
-;; (add-to-list 'default-frame-alist
-;;                '(background-color . "black")
-;;                '(font .  "Inconsolata Bold 10"))
+;; (spaceline-all-the-icons-theme)
+(prelude-require-package 'doom-modeline)
+(doom-modeline-mode 1)
 
 ;; disable scroll bar
 (scroll-bar-mode -1)

@@ -31,3 +31,7 @@ ido.last
 .persistent-scratch
 abbrev_defs
 .org-id-locations
+.cache
+.lsp-session-v1
+logview-cache.extmap
+transient

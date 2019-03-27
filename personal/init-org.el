@@ -32,6 +32,9 @@
 
 ;;; Code:
 (prelude-require-package 'org)
+(prelude-require-package 'org-plus-contrib)
+(require 'ox-taskjuggler)
+(add-to-list 'org-export-backends 'taskjuggler)
 
 ;; Formatting of time stamps in clock table.
 (setq org-time-clocksum-format
