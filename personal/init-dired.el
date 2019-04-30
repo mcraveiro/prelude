@@ -33,7 +33,8 @@
 ;;; Code:
 
 ;; Dired switches
-(setq dired-listing-switches "-laGh1v --group-directories-first")
+;; --group-directories-first
+(setq dired-listing-switches "-lGh1v --group-directories-first")
 ;; (setq list-directory-brief-switches "-CF")
 (setq list-directory-brief-switches nil)
 

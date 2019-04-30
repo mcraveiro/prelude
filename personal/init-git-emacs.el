@@ -40,6 +40,7 @@
 
 (setq magit-auto-revert-mode nil)
 (setq magit-last-seen-setup-instructions "1.4.0")
+(setq transient-default-level 5)
 
 (setq magit-display-buffer-function
       (lambda (buffer)

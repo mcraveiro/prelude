@@ -192,6 +192,29 @@
 ;; Remove empty groups
 (setq ibuffer-show-empty-filter-groups nil)
 
+(setq ibuffer-filter-group-name-face '(:inherit (font-lock-string-face bold)))
+
+             ;; (
+             ;;   ;; Display buffer icons on GUI
+             ;;  (when (display-graphic-p)
+             ;;    (define-ibuffer-column icon (:name " ")
+             ;;      (let ((icon (if (and buffer-file-name
+             ;;                         (all-the-icons-match-to-alist buffer-file-name
+             ;;                                                       all-the-icons-icon-alist))
+             ;;                      (all-the-icons-icon-for-file (file-name-nondirectory buffer-file-name)
+             ;;                                                   :height 0.9 :v-adjust -0.05)
+             ;;                    (all-the-icons-icon-for-mode major-mode :height 0.9 :v-adjust -0.05))))
+             ;;        (if (symbolp icon)
+             ;;            (setq icon (all-the-icons-faicon "file-o" :face 'all-the-icons-dsilver :height 0.9 :v-adjust -0.05))
+             ;;          icon)))
+
+             ;;    (setq ibuffer-formats '((mark modified read-only locked
+             ;;                                  " " (icon 2 2 :left :elide) (name 18 18 :left :elide)
+             ;;                                  " " (size 9 -1 :right)
+             ;;                                  " " (mode 16 16 :left :elide) " " filename-and-process)
+             ;;                            (mark " " (name 16 -1) " " filename))))
+             ;;  )
+
 ;; Setup filter groups
 (add-hook 'ibuffer-mode-hook
           '(lambda ()

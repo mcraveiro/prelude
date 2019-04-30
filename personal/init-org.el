@@ -35,6 +35,14 @@
 (prelude-require-package 'org-plus-contrib)
 (require 'ox-taskjuggler)
 (add-to-list 'org-export-backends 'taskjuggler)
+(prelude-require-package 'org-bullets)
+(prelude-require-package 'org-beautify-theme)
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (org-bullets-mode 1)
+;;             (load-theme 'org-beautify)
+            ))
 
 ;; Formatting of time stamps in clock table.
 (setq org-time-clocksum-format

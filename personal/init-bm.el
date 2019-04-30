@@ -34,6 +34,7 @@
 
 ;; Visual bookmarks mode
 (prelude-require-package 'bm)
+(prelude-require-package 'helm-bm)
 
 ;; location of the persistent bookmarks
 (setq bm-repository-file (concat temporary-file-directory "bm-repository"))
@@ -77,8 +78,9 @@
 ;;
 ;; Key bindings
 ;;
-; (global-set-key (kbd "<f2>") 'bm-toggle)
-; (global-set-key (kbd "<C-f2>") 'bm-next)
-; (global-set-key (kbd "<S-f2>") 'bm-previous)
+(global-set-key (kbd "<f9>") 'bm-toggle)
+(global-set-key (kbd "<C-f9>") 'bm-next)
+(global-set-key (kbd "<S-f9>") 'bm-previous)
+(global-set-key (kbd "<M-f9>") 'helm-bm)
 
 ;;; init-bm.el ends here

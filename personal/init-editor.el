@@ -43,7 +43,7 @@
 ;;              '(background-color . "black")
 ;;              '(font .  "Inconsolata Bold 10"))
 
-;; (set-frame-font "Inconsolata Bold 8")
+;; (set-frame-font "Inconsolata Bold 18")
 (setq default-frame-alist
       '(
         (background-color . "black")
@@ -113,9 +113,14 @@
 (prelude-require-package 'treemacs-magit)
 (prelude-require-package 'treemacs-icons-dired)
 (prelude-require-package 'treemacs-projectile)
+(prelude-require-package 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 
+(setq treemacs-width 70)
 (treemacs-icons-dired-mode)
 (treemacs-git-mode 'extended)
+(treemacs-tag-follow-mode 1)
+
 
 (global-jump-tree-mode)
 
@@ -130,14 +135,15 @@
 (yas-global-mode 1)
 (yas-load-directory "~/.emacs.d/personal/data/yasnippets")
 
+(prelude-require-package 'wgrep)
 (prelude-require-package 'function-args)
 (prelude-require-package 'pretty-mode)
 (prelude-require-package 'helm)
 (prelude-require-package 'helm-flycheck)
 (prelude-require-package 'helm-ispell)
 (prelude-require-package 'helm-proc)
-(global-pretty-mode 1)
 (prelude-require-package 'pretty-mode)
+(global-pretty-mode 1)
 
 (require 'cycbuf)
 ;;  (global-set-key [(meta right)]       'cycbuf-switch-to-next-buffer)
@@ -155,9 +161,10 @@
 (add-hook 'erc-mode-hook (lambda () (erc-fill-mode nil)))
 (smartparens-global-mode t)
 
-;; (spaceline-all-the-icons-theme)
-(prelude-require-package 'doom-modeline)
-(doom-modeline-mode 1)
+;(spaceline-all-the-icons-theme)
+;(setq spaceline-all-the-icons-separator-type 'arrow)
+;(prelude-require-package 'doom-modeline)
+; (doom-modeline-mode 1)
 
 ;; disable scroll bar
 (scroll-bar-mode -1)
@@ -503,5 +510,26 @@ expects some output that isn't there and triggers an error"
 (setq compilation-finish-functions
       (append compilation-finish-functions
               '(fmq-compilation-finish)))
+
+;; (setq zenburn-override-colors-alist
+;;       '(("zenburn-bg+05" . "#282828")
+;;         ("zenburn-bg"    . "#000000")
+;;         ("zenburn-bg+1"  . "#2F2F2F")
+;;         ("zenburn-bg+2"  . "#3F3F3F")
+;;         ("zenburn-bg+3"  . "#4F4F4F")))
+
+;; use variable-pitch fonts for some headings and titles
+; (setq zenburn-use-variable-pitch t)
+
+;; scale headings in org-mode
+;(setq zenburn-scale-org-headlines t)
+
+;; scale headings in outline-mode
+;(setq zenburn-scale-outline-headlines t)
+;(load-theme 'zenburn t)
+
+
+(prelude-require-package 'eyebrowse)
+(eyebrowse-mode t)
 
 ;;; init-editor.el ends here

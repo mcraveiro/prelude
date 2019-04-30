@@ -86,4 +86,17 @@
 (add-to-list 'compilation-error-regexp-alist 'mcs-warning)
 (add-to-list 'compilation-error-regexp-alist 't4-error)
 
+(when (require 'ansi-color nil t)
+  (defun my-colorize-compilation-buffer ()
+    (when (eq major-mode 'compilation-mode)
+      (ansi-color-apply-on-region compilation-filter-start (point-max))))
+  (add-hook 'compilation-filter-hook 'my-colorize-compilation-buffer))
+
+;; (require 'ansi-color)
+;; (defun colorize-compilation-buffer ()
+;;   (toggle-read-only)
+;;   (ansi-color-apply-on-region compilation-filter-start (point))
+;;   (toggle-read-only))
+;; (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
 ;;; init-compile.el ends here
