@@ -44,7 +44,7 @@
 (setq lsp-clients-clangd-executable "/usr/bin/clangd-8")
 
 (setq lsp-clients-clangd-args
-      '("-j=4" "-log=verbose" "-background-index"
+      '("-j=2" "-log=verbose" "-background-index"
         ;; "--compile-commands-dir=/work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang7/Release"
         )
       )
@@ -53,6 +53,8 @@
 (prelude-require-package 'lsp-ui)
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 (require 'lsp-ui-flycheck)
+
+flycheck-check-syntax-automatically
 
 ;; guess root from projectile
 (setq lsp-auto-guess-root t)
@@ -101,7 +103,7 @@
       ;; lsp-ui-sideline-enable nil
       lsp-ui-flycheck-enable t
       lsp-ui-flycheck-list-position 'right
-      lsp-ui-flycheck-live-reporting t
+      lsp-ui-flycheck-live-reporting nil
       lsp-ui-peek-enable t
       lsp-ui-peek-list-width 60
       lsp-ui-peek-peek-height 25
