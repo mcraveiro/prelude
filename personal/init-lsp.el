@@ -41,10 +41,10 @@
 (prelude-require-package 'helm-lsp)
 
 (require 'lsp-clients)
-(setq lsp-clients-clangd-executable "/usr/bin/clangd-8")
+(setq lsp-clients-clangd-executable "/usr/bin/clangd-9")
 
 (setq lsp-clients-clangd-args
-      '("-j=2" "-log=verbose" "-background-index"
+      '("-j=4" "-log=verbose" "-background-index"
         ;; "--compile-commands-dir=/work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang7/Release"
         )
       )
@@ -53,8 +53,6 @@
 (prelude-require-package 'lsp-ui)
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 (require 'lsp-ui-flycheck)
-
-flycheck-check-syntax-automatically
 
 ;; guess root from projectile
 (setq lsp-auto-guess-root t)
@@ -75,6 +73,11 @@ flycheck-check-syntax-automatically
 (global-company-mode)
 (company-quickhelp-mode 1)
 (push 'company-lsp company-backends)
+
+(prelude-require-package 'lsp-java)
+(prelude-require-package 'kotlin-mode)
+(add-hook 'java-mode-hook #'lsp)
+(add-hook 'kotlin-mode-hook #'lsp)
 
 ; (define-key c-mode-base-map (kbd "<C-tab>") (function company-complete))
 
@@ -103,7 +106,7 @@ flycheck-check-syntax-automatically
       ;; lsp-ui-sideline-enable nil
       lsp-ui-flycheck-enable t
       lsp-ui-flycheck-list-position 'right
-      lsp-ui-flycheck-live-reporting nil
+      lsp-ui-flycheck-live-reporting t
       lsp-ui-peek-enable t
       lsp-ui-peek-list-width 60
       lsp-ui-peek-peek-height 25
@@ -166,4 +169,32 @@ flycheck-check-syntax-automatically
 (add-hook 'c++-mode-hook (lambda ()
                            (lsp)
                            (flycheck-mode)))
+
+; (require 'lsp-kotlin)
+; (add-hook 'kotlin-mode-hook #'lsp-kotlin-enable)
+;; (add-to-list 'exec-path "~/local/KotlinLanguageServer-0.1.13/bin")
+(add-to-list 'exec-path "~/local/KotlinLanguageServer-20190716/bin")
+
+;; (defcustom lsp-clients-kotlin-server-command
+;;   `("kotlin" ,(expand-file-name "~/local/KotlinLanguageServer-0.1.13/bin/server.sh"))
+;;   "Install directory for kotlin language-server."
+;;   :group 'lsp-kotlin
+;;   :type 'file)
+
+
+;; (lsp-register-client
+;;  (make-lsp-client :new-connection (lsp-stdio-connection '("kotlin-language-server"))
+;;                   :major-modes '(kotlin-mode)
+;;                   ;; :request-handlers (ht ("workspace/configuration" #'your-handler))
+;;                   :request-handlers (ht ("workspace/configuration" (lambda (workspace)
+;;                                                                      (with-lsp-workspace workspace
+;;                                                                        (lsp--set-configuration `(:kotlin-ls, lsp-clients-kotlin-settings))))))
+;;                   :priority -1
+;;                   :server-id 'kotlin-ls))
+
+;; (lsp-register-client
+;;  (make-lsp-client :new-connection (expand-file-name "~/local/KotlinLanguageServer-0.1.13/bin/server.sh")
+;;                   :major-modes '(kotlin-mode)
+;;                   :server-id 'kotlin-ls))
+
 ;;; init-cquery.el ends here

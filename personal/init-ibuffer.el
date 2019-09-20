@@ -51,6 +51,7 @@
                           (mode . fsharp-mode)))
                ("csharp" (mode . csharp-mode))
                ("java" (mode . java-mode))
+               ("kotlin" (mode . kotlin-mode))
                ("ruby" (mode . ruby-mode))
                ("perl" (mode . perl-mode))
                ("json" (mode . json-mode))
@@ -75,6 +76,7 @@
                ("awk" (mode . awk-mode))
                ("latex" (or
                          (name . ".tex$")
+                         (name . ".texi$")
                          (mode . tex-mode)
                          (mode . latex-mode)))
                ("markdown" (or

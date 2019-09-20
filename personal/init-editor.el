@@ -35,6 +35,7 @@
 ;; set the current frame background and font.
 ;; (set-background-color "black")
 ;; (set-frame-font "Inconsolata Bold 8")
+;; 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'
                                         ; (set-frame-font "DejaVu Sans Mono")
                                         ; (set-frame-font "Source Code Pro 8")
 
@@ -43,11 +44,17 @@
 ;;              '(background-color . "black")
 ;;              '(font .  "Inconsolata Bold 10"))
 
-;; (set-frame-font "Inconsolata Bold 18")
+
+;; (set-frame-font "Inconsolata Bold 10")
+;; (set-frame-font "Cascadia Code 10")
+
+;; (set-frame-font "Droid Sans Mono 8")
+
+;; (set-frame-font "Fira Code 7")
 (setq default-frame-alist
       '(
-        (background-color . "black")
-        (font . "Inconsolata Bold 8")
+        ;; (background-color . "black")
+        (font . "Droid Sans Mono 9")
         ))
 
 (setq prelude-guru nil)
@@ -85,6 +92,15 @@
 (openwith-mode t)
 (setq openwith-associations '(("\\.pdf\\'" "evince" (file))))
 
+; (global-linum-mode nil)
+; (setq linum-format "%4d\u2502 ")
+
+(prelude-require-package 'company-restclient)
+(prelude-require-package 'highlight-indent-guides)
+(prelude-require-package 'cycbuf)
+(prelude-require-package 'lsp-java)
+(prelude-require-package 'ssh)
+
 (prelude-require-package 'eyebrowse)
 (prelude-require-package 'git-gutter)
 (global-git-gutter-mode)
@@ -120,7 +136,7 @@
 (prelude-require-package 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 
-(setq treemacs-width 70)
+(setq treemacs-width 50)
 (treemacs-icons-dired-mode)
 (treemacs-git-mode 'extended)
 (treemacs-tag-follow-mode 1)
