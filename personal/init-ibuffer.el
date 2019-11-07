@@ -152,6 +152,8 @@
                                  (mode . Man-mode)))
                ("system" (or
                           (name . "^\\*Packages\\*$")
+                          (name . "^\\*helm M-x\\*$")
+                          (name . "^\\*helm mini\\*$")
                           (name . "^\\*helm projectile\\*$")
                           (name . "^\\*RTags Log\\*$")
                           (name . "^\\**RTags Diagnostics\\*$")
@@ -183,6 +185,11 @@
                           (name . "^\\*compdb:")
                           (name . "^\\*Backtrace\\*$")
                           (name . "^\\*Messages\\*$")))
+               ("Treemacs" (or
+                         (name . "^Treemacs Update")
+                        (name . "^\\*nnimap imap.")
+                        ))
+
                ))))
 
 ;; Shortcut for ibuffer

@@ -263,7 +263,7 @@
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
 ;; clean up obsolete buffers automatically
-(require 'midnight)
+; (require 'midnight)
 
 ;; smarter kill-ring navigation
 (require 'browse-kill-ring)

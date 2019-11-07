@@ -10,6 +10,7 @@
 ; (prelude-require-package 'scad-mode)
 ; (prelude-require-package 'scad-preview)
 (prelude-require-package 'define-word)
+;(require'smartparens-org)
                                         ; (prelude-require-package 'framemove)
 (prelude-require-package 'ace-window)
 (global-set-key (kbd "M-o") 'ace-window)
@@ -61,13 +62,13 @@
 (setq magit-completing-read-function 'ivy-completing-read)
 (setq projectile-completion-system 'ivy)
 
-
-(define-key smartparens-mode-map (kbd "M-<up>") nil)
-(define-key smartparens-mode-map (kbd "M-<down>") nil)
-(define-key smartparens-mode-map (kbd "C-<right>") nil)
-(define-key smartparens-mode-map (kbd "C-<left>") nil)
-(define-key smartparens-mode-map (kbd "C-M-<right>") nil)
-(define-key smartparens-mode-map (kbd "C-M-<left>") nil)
+;; conflict with org-mode
+;; (define-key smartparens-mode-map (kbd "M-<up>") nil)
+;; (define-key smartparens-mode-map (kbd "M-<down>") nil)
+;; (define-key smartparens-mode-map (kbd "C-<right>") nil)
+;; (define-key smartparens-mode-map (kbd "C-<left>") nil)
+;; (define-key smartparens-mode-map (kbd "C-M-<right>") nil)
+;; (define-key smartparens-mode-map (kbd "C-M-<left>") nil)
 
 (prelude-require-package 'windmove)
 (windmove-default-keybindings 'meta)

@@ -46,15 +46,17 @@
 
 
 ;; (set-frame-font "Inconsolata Bold 10")
-;; (set-frame-font "Cascadia Code 10")
+;; (set-frame-font "Cascadia Code 9")
 
 ;; (set-frame-font "Droid Sans Mono 8")
+
+(setq redis-cli-executable "/home/marco/local/bin/redis-cli-raw.sh")
 
 ;; (set-frame-font "Fira Code 7")
 (setq default-frame-alist
       '(
-        ;; (background-color . "black")
-        (font . "Droid Sans Mono 9")
+        (background-color . "black")
+        (font . "Cascadia Code 9")
         ))
 
 (setq prelude-guru nil)
@@ -136,7 +138,8 @@
 (prelude-require-package 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 
-(setq treemacs-width 50)
+(setq helm-autoresize-mode t)
+(setq treemacs-width 60)
 (treemacs-icons-dired-mode)
 (treemacs-git-mode 'extended)
 (treemacs-tag-follow-mode 1)
@@ -179,7 +182,7 @@
 
 (setq erc-join-buffer 'bury)
 (add-hook 'erc-mode-hook (lambda () (erc-fill-mode nil)))
-(smartparens-global-mode t)
+; (smartparens-global-mode t)
 
 ;(spaceline-all-the-icons-theme)
 ;(setq spaceline-all-the-icons-separator-type 'arrow)

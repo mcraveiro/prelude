@@ -86,6 +86,7 @@
    'lsp-after-open-hook (lambda () (lsp-ui-flycheck-enable 1))))
 
 (setq lsp-enable-indentation nil)
+(setq lsp-enable-on-type-formatting  nil)
 
 ;; (setq lsp-ui-sideline-delay 5)
 (setq lsp-ui-doc-delay 5)
