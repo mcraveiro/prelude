@@ -82,10 +82,10 @@
 
 ;; smart pairing for all
 (require 'smartparens-config)
-(setq sp-base-key-bindings 'paredit)
+; (setq sp-base-key-bindings 'paredit)
 (setq sp-autoskip-closing-pair 'always)
 (setq sp-hybrid-kill-entire-symbol nil)
-(sp-use-paredit-bindings)
+; (sp-use-paredit-bindings)
 
 (show-smartparens-global-mode +1)
 
@@ -146,7 +146,9 @@
 ;; use shift + arrow keys to switch between visible buffers
 (require 'windmove)
 ;; (windmove-default-keybindings)
-(windmove-default-keybindings 'meta)
+;; (windmove-default-keybindings 'meta)
+;; (windmove-default-keybindings 'ctrl)
+(windmove-default-keybindings 'super)
 
 ;; automatically save buffers associated with files on buffer switch
 ;; and on windows switch

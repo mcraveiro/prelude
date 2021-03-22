@@ -40,16 +40,14 @@
 (prelude-require-package 'company-lsp)
 (prelude-require-package 'helm-lsp)
 
-(require 'lsp-clients)
-(setq lsp-clients-clangd-executable "/usr/bin/clangd-9")
+;; (require 'lsp-clients)
+(setq lsp-csharp-server-path
+      "/home/marco/.emacs.d/.cache/lsp/omnisharp-roslyn/v1.37.6/omnisharp/OmniSharp.exe")
+(setq lsp-clients-clangd-executable "/usr/bin/clangd-11")
 
-(setq lsp-clients-clangd-args
-      '("-j=4" "-log=verbose" "-background-index"
-        ;; "--compile-commands-dir=/work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang7/Release"
-        )
-      )
+(setq lsp-clients-clangd-args '("-j=4" "-background-index")) ;; "-log=verbose"
 
-(setq lsp-prefer-flymake nil)
+;; (setq lsp-prefer-flymake nil)
 (prelude-require-package 'lsp-ui)
 (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 (require 'lsp-ui-flycheck)
@@ -57,22 +55,24 @@
 ;; guess root from projectile
 (setq lsp-auto-guess-root t)
 
-(setq company-idle-delay 0.3)
-(setq company-show-numbers t)
-(setq company-minimum-prefix-length 2)
-(setq company-dabbrev-downcase nil)
-(setq company-dabbrev-other-buffers t)
-(setq company-auto-complete nil)
-(setq company-dabbrev-code-other-buffers 'all)
-(setq company-dabbrev-code-everywhere t)
-(setq company-dabbrev-code-ignore-case t)
-(setq company-minimum-prefix-length 1)
-(setq company-transformers nil
-      company-lsp-async t
-      company-lsp-cache-candidates nil)
+(setq company-minimum-prefix-length 1
+      company-idle-delay 0.0)
+;; (setq company-idle-delay 0.3)
+;; (setq company-show-numbers t)
+;; (setq company-minimum-prefix-length 2)
+;; (setq company-dabbrev-downcase nil)
+;; (setq company-dabbrev-other-buffers t)
+;; (setq company-auto-complete nil)
+;; (setq company-dabbrev-code-other-buffers 'all)
+;; (setq company-dabbrev-code-everywhere t)
+;; (setq company-dabbrev-code-ignore-case t)
+;; (setq company-minimum-prefix-length 1)
+;; (setq company-transformers nil
+;;       company-lsp-async t
+;;       company-lsp-cache-candidates nil)
 (global-company-mode)
-(company-quickhelp-mode 1)
-(push 'company-lsp company-backends)
+;; (company-quickhelp-mode 1)
+;; (push 'company-lsp company-backends)
 
 (prelude-require-package 'lsp-java)
 (prelude-require-package 'kotlin-mode)
@@ -81,9 +81,9 @@
 
 ; (define-key c-mode-base-map (kbd "<C-tab>") (function company-complete))
 
-(with-eval-after-load 'lsp-mode
-  (add-hook
-   'lsp-after-open-hook (lambda () (lsp-ui-flycheck-enable 1))))
+;; (with-eval-after-load 'lsp-mode
+;;   (add-hook
+;;    'lsp-after-open-hook (lambda () (lsp-ui-flycheck-enable 1))))
 
 (setq lsp-enable-indentation nil)
 (setq lsp-enable-on-type-formatting  nil)
@@ -96,11 +96,14 @@
       lsp-ui-doc-position 'at-point
       lsp-ui-doc-header nil
       lsp-ui-doc-include-signature t
-      ;; lsp-ui-doc-background (doom-color 'base4)
-      ;; lsp-ui-doc-border (doom-color 'fg)
+      lsp-ui-doc-background (doom-color 'base4)
+      lsp-ui-doc-border (doom-color 'fg)
       )
 
 (setq lsp-ui-doc-enable t
+      lsp-headerline-breadcrumb-mode t
+      lsp-modeline-code-actions-mode t
+      lsp-diagnostics-modeline-mode t
       ;; lsp-ui-doc-use-childframe t
       ;; lsp-ui-doc-position 'top
       ;; lsp-ui-doc-include-signature t
@@ -112,6 +115,8 @@
       lsp-ui-peek-list-width 60
       lsp-ui-peek-peek-height 25
       )
+
+(setq lsp-treemacs-symbols-position-params '((side . right) (slot . 2) (window-width . 50)))
 
 (custom-set-faces
  '(lsp-ui-sideline-current-symbol

@@ -1,0 +1,86 @@
+* Notes on emacs
+
+** Emacs Wiki
+
+- [[https://www.emacswiki.org/emacs/gnusrss][Gnu RSS]]: RSS feed support in Gnus is implemented with the ‘nnrss’
+  backend.
+
+** Articles
+
+- [[http://tuhdo.github.io/helm-projectile.html][Exploring large projects with Projectile and Helm Projectile]]
+- [[http://pragmaticemacs.com/emacs/view-and-annotate-pdfs-in-emacs-with-pdf-tools/][View and annotate pdfs in emacs with pdf-tools]]
+- [[https://www.masteringemacs.org/article/keeping-secrets-in-emacs-gnupg-auth-sources][Keeping Secrets in Emacs with GnuPG and Auth Sources]]
+- [[https://emacs-helm.github.io/helm/][Helm]]: Emacs incremental completion and selection narrowing framework
+- [[https://modernduck.com/2018/02/gcloud-compute-ssh-improvements-emacs-tramp-mode/][gcloud compute ssh improvements & EMACS TRAMP mode]]
+- [[https://aliquote.org/post/emacs-python3/][Emacs and Python 3]]
+
+** Interesting projects
+
+- [[https://github.com/jixiuf/ivy-dired-history][ivy-dired-history]]: Use ivy to open recent directories
+- [[https://github.com/weirdNox/org-noter][org-noter]]: Emacs document annotator, using Org-mode
+- [[https://gitlab.com/howardabrams/emacs-piper][emacs-piper]]: Wrapper around existing Emacs functionality that
+  creates an interactive user interface to dealing with unstructured
+  textual data similar with how we transform data through pipes in the
+  shell.
+- [[https://github.com/thanhvg/emacs-hnreader][hnreader]]: Read Hacker News inside Emacs.
+- [[https://github.com/juliosueiras/terraform-lsp/releases][terraform-lsp]]
+
+** Books
+
+- [[https://github.com/redguardtoo/mastering-emacs-in-one-year-guide][Master Emacs in One Year]]: Be great at emacs in one year
+
+** Dot Emacs
+
+- [[https://github.com/dabrahams/dotemacs/blob/master/elhome/settings/gnus-settings.el][gnus-settings.el]]
+- https://www.john2x.com/emacs.html
+
+* Articles
+
+- [[https://www.ianbicking.org/blog/2015/08/conways-corollary.html][Conway’s Corollary]]
+- [[https://fs.blog/2009/12/mental-model-greshams-law/][Gresham’s Law: Why Bad Drives Out Good As Time Passes]]
+- [[https://www.nytimes.com/2020/03/27/business/stock-market-pandemic-coronavirus.html][I Became a Disciplined Investor Over 40 Years. The Virus Broke Me in 40 Days.]]
+- [[https://www.lynalden.com/global-dollar-short-squeeze/][The Global Dollar Short Squeeze]]
+- [[http://loup-vaillant.fr/tutorials/cofactor][Cofactor explained: clearing elliptic curves' dirty little secret]]
+- [[https://owaahh.com/the-age-of-mpesa/][The Age of MPESA]]
+- [[https://www.runningpress.com/titles/simon-lovell/how-to-cheat-at-everything/9781560259732/][How to Cheat at Everything]]
+- [[https://twitter.com/doctorow/status/1246445485860118528][Tweet thread on con men and finance]]
+- [[https://writings.stephenwolfram.com/2019/08/a-book-from-alan-turing-and-a-mysterious-piece-of-paper/][A Book from Alan Turing… and a Mysterious Piece of Paper]]
+- [[https://writings.stephenwolfram.com/2016/01/farewell-marvin-minsky-19272016/][Farewell, Marvin Minsky (1927–2016)]]
+- [[http://users.ox.ac.uk/~jrlucas/Godel/mmg.html][Minds, Machines and Gödel]]
+- [[https://www.collaborativefund.com/blog/what-next/][What Next? (Two Questions)]]
+- [[https://writings.stephenwolfram.com/2020/04/finally-we-may-have-a-path-to-the-fundamental-theory-of-physics-and-its-beautiful/][Finally We May Have a Path to the Fundamental Theory of
+  Physics... and It’s Beautiful]]
+- [[https://www.forbes.com/sites/jimcollins/2020/04/20/the-us-oil-etf-uso-is-the-culprit-behind-oils-massive-plunge/amp/?__twitter_impression=true][The U.S. Oil ETF, USO, Is The Culprit Behind Oil’s Massive Plunge]]
+- [[https://medium.com/slalom-technology/a-complete-gcp-environment-with-terraform-c087190366f0][A complete GCP environment with Terraform]]
+- [[https://eschulte.github.io/org-scraps/][org-scraps]]: A collection of short Org-mode snippets demonstrating
+  the usage of code blocks.
+
+* Papers
+
+- [[https://www.nature.com/articles/s41539-019-0048-y][Is plasticity of synapses the mechanism of long-term memory storage?]]
+- [[https://www.sciencedirect.com/science/article/pii/S1389041713000314][Implementations are not specifications: Specification, replication
+  and experimentation in computational cognitive modeling]]
+- [[https://arxiv.org/pdf/2003.03384.pdf][AutoML-Zero: Evolving Machine Learning Algorithms From Scratch]]
+
+* Videos and Podcasts
+
+- [[https://thisweekinstartups.com/angellist-syndicates-lean-startup-naval-ravikant/][E399: How AngelList is transforming startups and funding]]
+- [[http://radios.sapo.ao/radio-5][Radio 5 Angola]]
+- [[https://radiooooo.app/][radiooooo]]: music from olden times
+- [[https://www.crowdcast.io/e/meetupaiglobal][Differences between AI and the Brain]]. See also [[https://www.meetup.com/en-AU/meetupai-Berlin/events/269929747/?read=1&_xtd=gatlbWFpbF9jbGlja9oAJDNiMTNlYjJkLTBkYTUtNDExMC1iNjEwLTQxYjE3NDJlMjgyZg&_af=event&_af_eid=269929747][this link]].
+- [[https://www.youtube.com/watch?v=ez773teNFYA&feature=youtu.be][Stephen Wolfram: Cellular Automata, Computation, and Physics | AI
+  Podcast #89 with Lex Fridman]]
+- [[https://www.youtube.com/watch?v=qgG5Jhi_Els][Vim universe. fzf - command line fuzzy finder]]
+
+* GCP
+
+- [[https://cloud.google.com/sdk/docs/quickstart-debian-ubuntu][Quickstart for Debian and Ubuntu]]
+- [[https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys#createsshkeys][Managing SSH keys in metadata]]
+- [[https://cloud.google.com/compute/docs/instances/connecting-advanced#provide-key][Connecting to instances using advanced methods]]
+- [[https://cloud.google.com/sql/docs/postgres/external-connection-methods?hl=en_GB&_ga=2.237627139.-2065564734.1572530049][Connection options for external applications]]
+- [[https://cloud.google.com/sql/docs/postgres/connect-external-app#appaccessIP][Connecting to Cloud SQL from external applications]]
+- [[https://cloud.google.com/source-repositories/docs/authentication#ssh][Setting up local authentication]]
+
+* Python
+
+- [[https://realpython.com/python-csv/][Reading and Writing CSV Files in Python]]

@@ -194,6 +194,7 @@
 
 ;; Shortcut for ibuffer
 (global-set-key (kbd "<f5>") 'ibuffer)
+(global-set-key (kbd "<f6>") 'bufler)
 
 ;; Enable expert mode
 (setq ibuffer-expert t)

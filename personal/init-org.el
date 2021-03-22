@@ -38,6 +38,14 @@
 (prelude-require-package 'org-bullets)
 (prelude-require-package 'org-beautify-theme)
 
+;; Make windmove work in Org mode:
+(add-hook 'org-shiftup-final-hook 'windmove-up)
+(add-hook 'org-shiftleft-final-hook 'windmove-left)
+(add-hook 'org-shiftdown-final-hook 'windmove-down)
+(add-hook 'org-shiftright-final-hook 'windmove-right)
+
+
+
 (add-hook 'org-mode-hook
           (lambda ()
             (org-bullets-mode 1)
@@ -50,6 +58,8 @@
         (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
 
 (setq org-duration-format (quote h:mm))
+(setq org-indent-indentation-per-level 0)
+(setq org-support-shift-select t)
 
 ;; Preserve source code indentation on code blocks
 (setq org-src-preserve-indentation t)
@@ -149,6 +159,57 @@ This function is made for clock tables."
                            (match-string 2 s))))))
             tot))))
     0))))
+
+(prelude-require-package 'ox-gfm)
+(eval-after-load "org"
+  '(require 'ox-gfm nil t))
+
+(defun my-org-html-property-drawer (_property-drawer contents _info)
+  "Transcode a PROPERTY-DRAWER element from Org to HTML.
+CONTENTS holds the contents of the drawer.  INFO is a plist
+holding contextual information."
+  (when (org-string-nw-p contents)
+    (format "<div class=\"properties\">
+<ul>
+%s
+</ul>
+</div>" contents)))
+
+(defun my-org-html-node-property (node-property _contents _info)
+  "Transcode a NODE-PROPERTY element from Org to HTML.
+CONTENTS is nil.  INFO is a plist holding contextual
+information."
+  (format "<li>:%s:\t%s</li>"
+          (org-element-property :key node-property)
+          (let ((value (org-element-property :value node-property)))
+            (if value (concat " " value) ""))))
+
+(defun my-org-html-setup ()
+  "My modifications of the org-html exporter."
+  (advice-add 'org-html-property-drawer :override #'my-org-html-property-drawer)
+  (advice-add 'org-html-node-property :override #'my-org-html-node-property))
+
+(eval-after-load "ox-html" #'my-org-html-setup)
+
+(eval-after-load "org-present"
+  '(progn
+     (add-hook 'org-present-mode-hook
+               (lambda ()
+                 (org-present-big)
+                 (org-display-inline-images)
+                 (org-present-hide-cursor)
+                 (org-present-read-only)))
+     (add-hook 'org-present-mode-quit-hook
+               (lambda ()
+                 (org-present-small)
+                 (org-remove-inline-images)
+                 (org-present-show-cursor)
+                 (org-present-read-write)))
+     )
+  )
+
+(require 'framemove)
+(setq framemove-hook-into-windmove t)
 
 ;; nadvice
 ; (advice-add 'org-clock-time% :override #'org-clock-time%-mod)

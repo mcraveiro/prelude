@@ -31,4 +31,9 @@
 ;; Boston, MA 02110-1301, USA.
 (prelude-require-package 'bongo)
 
+(prelude-require-package 'emms)
+(require 'emms-setup)
+(emms-all)
+(emms-default-players)
+
 ;;; init-bongo.el ends here

@@ -54,4 +54,11 @@
                                  magit-status-mode)))
                     nil
                   '(display-buffer-same-window)))))
+
+(prelude-require-package 'dired-git)
+(prelude-require-package 'dired-git-info)
+(with-eval-after-load 'dired
+  (define-key dired-mode-map ")" 'dired-git-info-mode))
+(setq dgi-auto-hide-details-p nil)
+(add-hook 'dired-after-readin-hook 'dired-git-info-auto-enable)
 ;;; init-git-emacs.el ends here

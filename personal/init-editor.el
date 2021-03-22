@@ -46,18 +46,30 @@
 
 
 ;; (set-frame-font "Inconsolata Bold 10")
-;; (set-frame-font "Cascadia Code 9")
+;; (set-frame-font "Cascadia Code 10")
+;; for demo
+;; (set-frame-font "Cascadia Code 10")
 
 ;; (set-frame-font "Droid Sans Mono 8")
 
 (setq redis-cli-executable "/home/marco/local/bin/redis-cli-raw.sh")
 
-;; (set-frame-font "Fira Code 7")
+;; (set-frame-font "Fira Code 10")
+;; (set-frame-font "DejaVu Sans Mono")
+;; (set-frame-font "Cascadia Code 9")
+
 (setq default-frame-alist
       '(
         (background-color . "black")
         (font . "Cascadia Code 9")
         ))
+
+(fset 'test
+      (lambda (&optional arg) "Keyboard macro."
+        (interactive "p")
+        (kmacro-exec-ring-item
+         (quote ([down down end] 0 "%d")) arg)))
+
 
 (setq prelude-guru nil)
 
@@ -76,7 +88,8 @@
 (require 'prelude-xml)
 
 (require 'highlight-indent-guides)
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+(add-hook 'c-mode-common-hook 'highlight-indent-guides-mode)
+(add-hook 'cmake-mode-hook 'highlight-indent-guides-mode)
 (setq highlight-indent-guides-method 'character)
 
 (require 'package)
@@ -90,18 +103,70 @@
 (setq org-brain-visualize-default-choices 'all)
 (setq org-brain-title-max-length 12)
 
-(prelude-require-package 'openwith)
-(openwith-mode t)
-(setq openwith-associations '(("\\.pdf\\'" "evince" (file))))
+;; (prelude-require-package 'openwith)
+;; (openwith-mode t)
+;; (setq openwith-associations '(("\\.pdf\\'" "evince" (file))))
+(setq-default gdb-display-io-nopopup t)
 
 ; (global-linum-mode nil)
 ; (setq linum-format "%4d\u2502 ")
+
+(prelude-require-package 'company-box)
+(prelude-require-package 'company-shell)
+(add-hook 'company-mode-hook 'company-box-mode)
+(add-to-list 'company-backends 'company-shell)
+
+(defun company-eshell-history (command &optional arg &rest ignored)
+  (interactive (list 'interactive))
+  (cl-case command
+    (interactive (company-begin-backend 'company-eshell-history))
+    (prefix (and (eq major-mode 'eshell-mode)
+                 (let ((word (company-grab-word)))
+                   (save-excursion
+                     (eshell-bol)
+                     (and (looking-at-p (s-concat word "$")) word)))))
+    (candidates (remove-duplicates
+                 (->> (ring-elements eshell-history-ring)
+                      (remove-if-not (lambda (item) (s-prefix-p arg item)))
+                      (mapcar 's-trim))
+                 :test 'string=))
+    (sorted t)))
+
+(add-to-list 'company-backends 'company-eshell-history)
+
+(setq company-dabbrev-other-buffers nil)
+(setq company-dabbrev-ignore-case nil)
+(setq company-dabbrev-downcase nil)
+(setq company-selection-wrap-around t)
+(setq company-idle-delay 2)
 
 (prelude-require-package 'company-restclient)
 (prelude-require-package 'highlight-indent-guides)
 (prelude-require-package 'cycbuf)
 (prelude-require-package 'lsp-java)
 (prelude-require-package 'ssh)
+
+(prelude-require-package 'plantuml-mode)
+(setq plantuml-default-exec-mode 'jar)
+(setq plantuml-indent-level 4)
+(setq plantuml-output-type "png")
+(setq image-auto-resize nil)
+(prelude-require-package 'plantuml-mode)
+;; (setq plantuml-java-args
+;;       '("-DPLANTUML_LIMIT_SIZE=65535" "-Djava.awt.headless=true" "-jar" "--illegal-access=deny"))
+(with-eval-after-load "plantuml-mode"
+  (add-to-list 'plantuml-java-args "-DPLANTUML_LIMIT_SIZE=65535"))
+
+(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
+
+(with-eval-after-load "org"
+  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml)))
+
+(setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+(prelude-require-package 'flycheck-plantuml)
+(with-eval-after-load 'flycheck
+  (require 'flycheck-plantuml)
+  (flycheck-plantuml-setup))
 
 (prelude-require-package 'eyebrowse)
 (prelude-require-package 'git-gutter)
@@ -110,6 +175,8 @@
 (prelude-require-package 'helm)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (prelude-require-package 'helm-flyspell)
+(prelude-require-package 'flyspell-popup)
+(global-set-key  (kbd "M-$") 'flyspell-popup-correct)
 
 (prelude-require-package 'helm-systemd)
 (prelude-require-package 'helm-c-yasnippet)
@@ -139,16 +206,36 @@
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 
 (setq helm-autoresize-mode t)
-(setq treemacs-width 60)
+(define-key helm-find-files-map (kbd "<tab>")
+  'helm-execute-persistent-action)
+(define-key helm-find-files-map (kbd "C-<backspace>")
+  'helm-find-files-up-one-level)
+
+(setq treemacs-width 50)
 (treemacs-icons-dired-mode)
 (treemacs-git-mode 'extended)
 (treemacs-tag-follow-mode 1)
+(setq treemacs-position 'left)
 
-
+(setq doom-variable-pitch-font (font-spec :family "Cascadia Code" :size 9))
 (global-jump-tree-mode)
 
 (prelude-require-package 'rainbow-mode)
 (add-hook 'python-mode-hook #'rainbow-mode)
+
+(require 'w3m-load)
+(require 'w3m)
+
+(defun choose-browser (url &rest args)
+  (interactive "sURL: ")
+  (if (y-or-n-p "Use external browser? ")
+      (browse-url-generic url)
+    (w3m-browse-url url)))
+
+(setq browse-url-browser-function 'choose-browser)
+;; (global-set-key "\C-xm" 'browse-url-at-point)
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")
 
 (global-unset-key (kbd "C-c y"))
 (global-set-key (kbd "C-c y") 'helm-yas-complete)
@@ -176,18 +263,49 @@
 
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (add-hook 'c-mode-common-hook
-          (lambda() (local-set-key (kbd "C-c o")
-                              'helm-projectile-find-other-file)))
+          (lambda()
+            (local-set-key (kbd "C-c o")
+                           'helm-projectile-find-other-file)
+            (add-to-list 'compilation-error-regexp-alist
+                         '("^\\(..*\\)(\\([0-9]+\\): Throw" 1 2)))
+          (add-to-list 'compilation-error-regexp-alist
+                       '("^\\(..*\\)(\\([0-9]+\\): last checkpoint" 1 2)))
 ; (global-set-key (kbd "M-o") 'helm-projectile-find-other-file)
 
 (setq erc-join-buffer 'bury)
 (add-hook 'erc-mode-hook (lambda () (erc-fill-mode nil)))
 ; (smartparens-global-mode t)
 
-;(spaceline-all-the-icons-theme)
-;(setq spaceline-all-the-icons-separator-type 'arrow)
+;; (setq powerline-height 18)
+;; (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+;; (setq-default powerline-default-separator 'slant)
+;; (setq spaceline-separator-dir-left '(right . right))
+;; (setq spaceline-separator-dir-right '(right . right))
+
+;; (require 'spaceline-config)
+;; (spaceline-toggle-buffer-size-off)
+;; (spaceline-spacemacs-theme)
+;; (setq spaceline-buffer-encoding-abbrev-p nil
+;;       spaceline-window-numbers-unicode t
+;;       spaceline-line-column-p nil
+;;       spaceline-buffer-id-p nil
+;;       spaceline-minor-modes-separator nil)
+(spaceline-all-the-icons-theme)
+(spaceline-all-the-icons--setup-package-updates)
+(spaceline-all-the-icons--setup-git-ahead)
+(powerline-reset)
+
+(setq spaceline-all-the-icons-separator-type 'none)
+;; (spaceline-all-the-icons--setup-neotree)
+
 ;(prelude-require-package 'doom-modeline)
-; (doom-modeline-mode 1)
+;(doom-modeline-mode 1)
+
+;; (use-package spaceline-all-the-icons
+;;              :straight t
+;;              :after spaceline
+;;              :config (spaceline-all-the-icons-theme)
+;;              (spaceline-all-the-icons--setup-neotree))
 
 ;; disable scroll bar
 (scroll-bar-mode -1)
@@ -216,6 +334,9 @@
     (interactive)
     (if (y-or-n-p-with-timeout "Do you really want to exit Emacs ?" 4 nil)
         (save-buffers-kill-emacs))))
+
+(prelude-require-package 'ace-jump-mode)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
 ;; disable stack traces on errors (the annoying backtrace buffer)
 (setq stack-trace-on-error nil)
@@ -530,9 +651,9 @@ expects some output that isn't there and triggers an error"
 ;;                 "Compilation finished in Emacs"
 ;;                 status))
 
-(setq compilation-finish-functions
-      (append compilation-finish-functions
-              '(fmq-compilation-finish)))
+;; (setq compilation-finish-functions
+;;      (append compilation-finish-functions
+;;              '(fmq-compilation-finish)))
 
 ;; (setq zenburn-override-colors-alist
 ;;       '(("zenburn-bg+05" . "#282828")
@@ -545,7 +666,10 @@ expects some output that isn't there and triggers an error"
 ; (setq zenburn-use-variable-pitch t)
 
 ;; scale headings in org-mode
-;(setq zenburn-scale-org-headlines t)
+;;(setq zenburn-scale-org-headlines t)
+(org-babel-do-load-languages
+ 'org-babel-load-languages '((C . t)))
+
 
 ;; scale headings in outline-mode
 ;(setq zenburn-scale-outline-headlines t)
@@ -554,5 +678,295 @@ expects some output that isn't there and triggers an error"
 
 (prelude-require-package 'eyebrowse)
 (eyebrowse-mode t)
+
+;; (eval-after-load
+;;     'company
+;;   '(add-to-list 'company-backends #'company-omnisharp))
+
+(defun my-csharp-mode-setup ()
+  (lsp-mode)
+  (company-mode)
+  (flycheck-mode)
+
+  (setq indent-tabs-mode nil)
+  (setq c-syntactic-indentation t)
+  (c-set-style "ellemtel")
+  (setq c-basic-offset 4)
+  (setq truncate-lines t)
+  (setq tab-width 4)
+  (setq evil-shift-width 4)
+
+                                        ;csharp-mode README.md recommends this too
+                                        ;(electric-pair-mode 1)       ;; Emacs 24
+                                        ;(electric-pair-local-mode 1) ;; Emacs 25
+
+  ;; (local-set-key (kbd "C-c r r") 'omnisharp-run-code-action-refactoring)
+  (local-set-key (kbd "C-c C-c") 'recompile))
+
+(add-hook 'csharp-mode-hook 'my-csharp-mode-setup t)
+;; (custom-set-variables '(gnus-select-method (quote (nnreddit ""))))
+
+;; (setq gnus-thread-sort-functions
+;;       '(gnus-thread-sort-by-number
+;;         (not gnus-thread-sort-by-date)))
+;; (setq gnus-thread-sort-functions '(not gnus-thread-sort-by-date))
+
+(defun radian--undo-tree-suppress-undo-history-saved-message
+    (undo-tree-save-history &rest args)
+  (let ((inhibit-message t))
+    (apply undo-tree-save-history args)))
+
+;; Suppress the message saying that the undo history could not be
+;; loaded because the file changed outside of Emacs.
+
+(defun radian--undo-tree-suppress-buffer-modified-message
+    (undo-tree-load-history &rest args)
+  (let ((inhibit-message t))
+    (apply undo-tree-load-history args)))
+
+(advice-add #'undo-tree-load-history :around
+            #'radian--undo-tree-suppress-buffer-modified-message)
+
+(prelude-require-package 'elfeed)
+(prelude-require-package 'elfeed-goodies)
+(elfeed-goodies/setup)
+(setq elfeed-goodies/entry-pane-position 'bottom)
+;; (setq elfeed-goodies/entry-pane-size 0.5)
+(setq elfeed-feeds
+      '("https://my.cdash.org/rss/SubmissionRSSMASD%20Project%20-%20C++%20Reference%20Implementation.xml"
+        "https://github.com/MASD-Project/csharp_ref_impl/tags/master.atom"
+        "https://github.com/MASD-Project/csharp_ref_impl/releases/master.atom"
+        "https://github.com/MASD-Project/csharp_ref_impl/commits/master.atom"
+        "https://github.com/MASD-Project/dogen/tags/master.atom"
+        "https://github.com/MASD-Project/dogen/releases/master.atom"
+        "https://github.com/MASD-Project/dogen/commits/master.atom"
+        "https://github.com/MASD-Project/cpp_ref_impl/tags/master.atom"
+        "https://github.com/MASD-Project/cpp_ref_impl/releases/master.atom"
+        "https://github.com/MASD-Project/cpp_ref_impl/commits/master.atom"
+        "https://my.cdash.org/rss/SubmissionRSSMASD+Project+-+C%2B%2B+Reference+Implementation.xml"
+        "https://my.cdash.org/viewFeed.php?projectid=1245"
+        "https://my.cdash.org/rss/SubmissionRSSMASD%20Project%20-%20Dogen.xml"))
+
+(setq auth-sources '("~/.authinfo.gpg"))
+
+(defun my-fetch-password (&rest params)
+  (require 'auth-source)
+  (let ((match (car (apply 'auth-source-search params))))
+    (if match
+        (let ((secret (plist-get match :secret)))
+          (if (functionp secret)
+              (funcall secret)
+            secret))
+      (error "Password not found for %S" params))))
+
+(defun my-nickserv-password (server)
+  (my-fetch-password :login "mcraveiro" :machine "irc.gitter.im"))
+
+(setq irc-debug-log t)
+
+(setq circe-network-options
+      `(("Gitter"
+         :tls t
+         :nick "mcraveiro"
+         :pass 0cd77e23b4acfc2c6522af6db4713ad2a23b3da3
+         :server-buffer-name "⇄ gitter"
+         :host "irc.gitter.im"
+         :service "6697")))
+
+;; (setq elfeed-show-entry-switch #'popwin:elfeed-show-entry
+;;       elfeed-show-entry-delete #'popwin:elfeed-kill-buffer
+;;       elfeed-search-header-function #'feed-reader/search-header)
+
+;; (prelude-require-package 'centaur-tabs)
+;; (centaur-tabs-group-by-projectile-project)
+;; (centaur-tabs-change-fonts "Cascadia Code" 120)
+;; (setq centaur-tabs-style "bar"
+;;       centaur-tabs-height 32
+;;       centaur-tabs-set-icons t
+;;       centaur-tabs-set-modified-marker t
+;;       centaur-tabs-show-navigation-buttons t
+;;       centaur-tabs-set-bar 'under
+;;       x-underline-at-descent-line t)
+;; (centaur-tabs-headline-match)
+;; ;; (setq centaur-tabs-gray-out-icons 'buffer)
+;; ;; (centaur-tabs-enable-buffer-reordering)
+;; ;; (setq centaur-tabs-adjust-buffer-order t)
+;; (centaur-tabs-mode t)
+;; (setq centaur-tabs-set-bar 'under)
+;; (setq x-underline-at-descent-line t)
+;; (setq centaur-tabs-gray-out-icons 'buffer)
+;; (setq centaur-tabs-height 40)
+;; (setq centaur-tabs-style "wave")
+;; (setq uniquify-separator "/")
+;; (setq uniquify-buffer-name-style 'forward)
+
+;; (defun centaur-tabs-buffer-groups ()
+;;   "`centaur-tabs-buffer-groups' control buffers' group rules.
+;;  Group centaur-tabs with mode if buffer is derived from
+;;  `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode'
+;;  `magit-mode'.  All buffer name start with * will group to
+;;  \"Emacs\".  Other buffer group by `centaur-tabs-get-group-name'
+;;  with project name."
+;;   (list
+;;    (cond
+;;     ;; ((not (eq (file-remote-p (buffer-file-name)) nil))
+;;     ;; "Remote")
+;;     ((or (string-equal "*" (substring (buffer-name) 0 1))
+;;         (memq major-mode '(magit-process-mode
+;;                            magit-status-mode
+;;                            magit-diff-mode
+;;                            magit-log-mode
+;;                            magit-file-mode
+;;                            magit-blob-mode
+;;                            magit-blame-mode
+;;                            )))
+;;      "Emacs")
+;;     ((derived-mode-p 'prog-mode)
+;;      "Editing")
+;;     ((derived-mode-p 'dired-mode)
+;;      "Dired")
+;;     ((memq major-mode '(helpful-mode
+;;                 help-mode))
+;;      "Help")
+;;     ((memq major-mode '(org-mode
+;;                         org-agenda-clockreport-mode
+;;                         org-src-mode
+;;                         org-agenda-mode
+;;                         org-beamer-mode
+;;                         org-indent-mode
+;;                         org-bullets-mode
+;;                         org-cdlatex-mode
+;;                         org-agenda-log-mode
+;;                         diary-mode))
+;;      "OrgMode")
+;;     (t
+;;      (centaur-tabs-get-group-name (current-buffer))))))
+
+;; (add-hook 'dired-mode-hook 'centaur-tabs-local-mode)
+;; :hook
+;; (dashboard-mode . centaur-tabs-local-mode)
+;; (term-mode . centaur-tabs-local-mode)
+;; (calendar-mode . centaur-tabs-local-mode)
+;; (org-agenda-mode . centaur-tabs-local-mode)
+;; (helpful-mode . centaur-tabs-local-mode)
+;; :bind
+;;    ("C-<prior>" . centaur-tabs-backward)
+;;    ("C-<next>" . centaur-tabs-forward)
+;;    ("C-c t s" . centaur-tabs-counsel-switch-group)
+;;    ("C-c t p" . centaur-tabs-group-by-projectile-project)
+;;    ("C-c t g" . centaur-tabs-group-buffer-groups)
+;;    (:map evil-normal-state-map
+;;       ("g t" . centaur-tabs-forward)
+;;       ("g T" . centaur-tabs-backward))
+
+(with-eval-after-load "ispell"
+  ;; Configure `LANG`, otherwise ispell.el cannot find a 'default
+  ;; dictionary' even though multiple dictionaries will be configured
+  ;; in next line.
+  ;; (setenv "LANG" "en_GB") ;; en_GB.UTF-8
+  (setq ispell-program-name "hunspell")
+  ;; Configure German, Swiss German, and two variants of English.
+  (setq ispell-dictionary "en_GB,pt_PT")
+  ;; ispell-set-spellchecker-params has to be called
+  ;; before ispell-hunspell-add-multi-dic will work
+  (ispell-set-spellchecker-params)
+  (ispell-hunspell-add-multi-dic "en_GB,pt_PT")
+  ;; For saving words to the personal dictionary, don't infer it from
+  ;; the locale, otherwise it would save to ~/.hunspell_de_DE.
+  (setq ispell-personal-dictionary "~/.hunspell_personal"))
+
+;; The personal dictionary file has to exist, otherwise hunspell will
+;; silently not use it.
+(unless (file-exists-p ispell-personal-dictionary)
+  (write-region "" nil ispell-personal-dictionary nil 0)
+  )
+
+(setq eshell-prompt-regexp "^[^#$\n]*[#$] "
+      eshell-prompt-function
+      (lambda nil
+        (concat
+         "[" (user-login-name) "@" (system-name) " "
+         (if (string= (eshell/pwd) (getenv "HOME"))
+             "~" (eshell/basename (eshell/pwd)))
+         "]"
+         (if (= (user-uid) 0) "# " "$ "))))
+
+(defun m-eshell-hook ()
+
+                                        ; define control p, control n and the up/down arrow
+  (define-key eshell-mode-map [(control p)] 'eshell-previous-matching-input-from-input)
+  (define-key eshell-mode-map [(control n)] 'eshell-next-matching-input-from-input)
+
+  (define-key eshell-mode-map [up] 'previous-line)
+  (define-key eshell-mode-map [down] 'next-line)
+  )
+
+(add-hook 'eshell-mode-hook 'm-eshell-hook)
+
+(prelude-require-package 'helpful)
+(global-set-key (kbd "C-h f") #'helpful-callable)
+(global-set-key (kbd "C-h v") #'helpful-variable)
+(global-set-key (kbd "C-h k") #'helpful-key)
+;; Lookup the current symbol at point. C-c C-d is a common keybinding
+;; for this in lisp modes.
+(global-set-key (kbd "C-c C-d") #'helpful-at-point)
+
+;; Look up *F*unctions (excludes macros).
+;;
+;; By default, C-h F is bound to `Info-goto-emacs-command-node'. Helpful
+;; already links to the manual, if a function is referenced there.
+(global-set-key (kbd "C-h F") #'helpful-function)
+
+;; Look up *C*ommands.
+;;
+;; By default, C-h C is bound to describe `describe-coding-system'. I
+;; don't find this very useful, but it's frequently useful to only
+;; look at interactive functions.
+(global-set-key (kbd "C-h C") #'helpful-command)
+
+(prelude-require-package 'eshell-git-prompt)
+(eshell-git-prompt-use-theme 'powerline)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (setq eshell-prompt-function                                                                    ;;
+;;       (lambda ()                                                                                     ;;
+;;         (concat                                                                                 ;;
+;;          (propertize "┌─[" 'face `(:foreground "green"))                                        ;;
+;;          (propertize (user-login-name) 'face `(:foreground "red"))                              ;;
+;;          (propertize "@" 'face `(:foreground "green"))                                          ;;
+;;          (propertize (system-name) 'face `(:foreground "blue"))                                 ;;
+;;          (propertize "]──[" 'face `(:foreground "green"))                                       ;;
+;;          (propertize (format-time-string "%H:%M" (current-time)) 'face `(:foreground "yellow")) ;;
+;;          (propertize "]──[" 'face `(:foreground "green"))                                       ;;
+;;          (propertize (concat (eshell/pwd)) 'face `(:foreground "white"))                        ;;
+;;          (propertize "]\n" 'face `(:foreground "green"))                                        ;;
+;;          (propertize "└─>" 'face `(:foreground "green"))                                        ;;
+;;          (propertize (if (= (user-uid) 0) " # " " $ ") 'face `(:foreground "green"))            ;;
+;;          )))                                                                                    ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(prelude-require-package 'define-word)
+(require 'define-word)
+(defun cunene/display-word (&rest args)
+  "Create a buffer for display word instead of using messages."
+  (interactive)
+  (let
+      ((buffer (get-buffer-create "Define Word")))
+    (set-buffer buffer)
+    (erase-buffer)
+    (set-buffer-major-mode buffer)
+    (apply 'insert args)
+    (display-buffer buffer))
+  )
+
+(setq define-word-displayfn-alist
+      (cl-loop for (service . _) in define-word-services
+               collect (cons service #'cunene/display-word)))
+
+(prelude-require-package 'popper)
+(setq popper-reference-buffers
+      '("\\*Messages\\*" "Output\\*$" "Define Word" help-mode helpful-mode
+        "^\\*RE-Builder\\*$" "^\\*Kill Ring\\*$" "^\\*Calendar\\*$"
+        "^\\*WoMan-Log\\*$" "^\\*Apropos\\*$" "^\\*Completions\\*$"))
+(popper-mode +1)
 
 ;;; init-editor.el ends here

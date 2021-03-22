@@ -45,7 +45,8 @@
             (c-toggle-hungry-state 1)          ;; use hungry delete.
             (auto-fill-mode 1)                 ;; auto fill comments
             (setq c-basic-offset tab-width)
-            (setq c-default-style "stroustrup")))
+            ;; (setq c-default-style "stroustrup")
+            ))
 
 ;; Key bindings
 (eval-after-load 'cc-mode
