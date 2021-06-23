@@ -56,8 +56,8 @@
 (setq lsp-auto-guess-root t)
 
 (setq company-minimum-prefix-length 1
-      company-idle-delay 0.0)
-;; (setq company-idle-delay 0.3)
+      company-idle-delay 5)
+;; (setq company-idle-delay 1)
 ;; (setq company-show-numbers t)
 ;; (setq company-minimum-prefix-length 2)
 ;; (setq company-dabbrev-downcase nil)

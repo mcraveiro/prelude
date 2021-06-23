@@ -210,6 +210,7 @@ information."
 
 (require 'framemove)
 (setq framemove-hook-into-windmove t)
+(add-hook 'bookmark-after-jump-hook 'org-bookmark-jump-unhide)
 
 ;; nadvice
 ; (advice-add 'org-clock-time% :override #'org-clock-time%-mod)

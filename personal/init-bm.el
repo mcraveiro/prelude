@@ -83,4 +83,32 @@
 (global-set-key (kbd "<S-f9>") 'bm-previous)
 (global-set-key (kbd "<M-f9>") 'helm-bm)
 
+(defvar bm-after-goto-hook nil
+  "Hook run after jumping to a bookmark in `bm-goto'.")
+
+(add-hook 'bm-after-goto-hook 'org-bookmark-jump-unhide)
+
+(defun bm-goto (bookmark)
+  "Goto specified BOOKMARK."
+  (if (bm-bookmarkp bookmark)
+      (progn
+        (if bm-goto-position
+            (goto-char (max
+                        ;; sometimes marker-position is before start of overlay
+                        ;; marker is not updated when overlay hooks are called.
+                        (overlay-start bookmark)
+                        (marker-position (overlay-get bookmark 'position))))
+          (goto-char (overlay-start bookmark)))
+        (run-hooks 'bm-after-goto-hook)
+        (setq bm-wrapped nil)           ; turn off wrapped state
+        (if bm-recenter
+            (recenter))
+        (let ((annotation (overlay-get bookmark 'annotation)))
+          (if annotation
+              (message annotation)))
+        (when  (overlay-get bookmark 'temporary-bookmark)
+          (bm-bookmark-remove  bookmark)))
+    (when (> bm-verbosity-level 0)
+      (message "Bookmark not found."))))
+
 ;;; init-bm.el ends here

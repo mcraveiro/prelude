@@ -49,6 +49,7 @@
 ;; (set-frame-font "Cascadia Code 10")
 ;; for demo
 ;; (set-frame-font "Cascadia Code 10")
+;; (set-frame-font "Hack 8")
 
 ;; (set-frame-font "Droid Sans Mono 8")
 
@@ -61,7 +62,7 @@
 (setq default-frame-alist
       '(
         (background-color . "black")
-        (font . "Cascadia Code 9")
+        (font . "Hack 8")
         ))
 
 (fset 'test
@@ -163,6 +164,8 @@
   (add-to-list 'org-src-lang-modes '("plantuml" . plantuml)))
 
 (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+(setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+
 (prelude-require-package 'flycheck-plantuml)
 (with-eval-after-load 'flycheck
   (require 'flycheck-plantuml)
@@ -670,6 +673,10 @@ expects some output that isn't there and triggers an error"
 (org-babel-do-load-languages
  'org-babel-load-languages '((C . t)))
 
+(add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+(org-babel-do-load-languages
+ 'org-babel-load-languages '((plantuml . t)))
+
 
 ;; scale headings in outline-mode
 ;(setq zenburn-scale-outline-headlines t)
@@ -915,7 +922,6 @@ expects some output that isn't there and triggers an error"
 ;;
 ;; By default, C-h F is bound to `Info-goto-emacs-command-node'. Helpful
 ;; already links to the manual, if a function is referenced there.
-(global-set-key (kbd "C-h F") #'helpful-function)
 
 ;; Look up *C*ommands.
 ;;
@@ -968,5 +974,18 @@ expects some output that isn't there and triggers an error"
         "^\\*RE-Builder\\*$" "^\\*Kill Ring\\*$" "^\\*Calendar\\*$"
         "^\\*WoMan-Log\\*$" "^\\*Apropos\\*$" "^\\*Completions\\*$"))
 (popper-mode +1)
+
+(prelude-require-package 'visual-regexp)
+(define-key global-map (kbd "C-c r") 'vr/replace)
+(define-key global-map (kbd "C-c q") 'vr/query-replace)
+;; if you use multiple-cursors, this is for you:
+(define-key global-map (kbd "C-c m") 'vr/mc-mark)
+
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (let ((inhibit-read-only t))
+    (ansi-color-apply-on-region (point-min) (point-max))))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+(global-set-key (kbd "C-c C-r") 'recompile)
 
 ;;; init-editor.el ends here
